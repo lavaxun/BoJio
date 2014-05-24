@@ -85,6 +85,7 @@
 	  // Do something with the found objects
 	  for (PFObject *object in objects) {
         NSLog(@"Event : %@", object.objectId);
+		NSLog(@"Event 22 : %@", [object objectForKey:@"eventDate"]);
 	  }
 	  
 	  eventsList = objects;
@@ -145,13 +146,14 @@
   }
   
   
+  PFObject *object = [eventsList objectAtIndex:indexPath.row];
   
-  
-  NSString *eventName	= [NSString stringWithFormat:@"Test Event : %d", indexPath.row];
-  NSString *eventPlace	= [NSString stringWithFormat:@"Place : %d", indexPath.row];
+  NSString *eventName	= [object objectForKey:@"title"];
+  NSString *eventPlace	= [[object objectForKey:@"location_info"] objectForKey:@"Name"];
   NSString *eventTime	= @"";
-  NSString *eventDesc	= @"";
-  NSString *eventType	= @"";
+  NSString *eventDesc	= [object objectForKey:@"summary"];
+  NSString *eventType	= @""; //[self getUserEventTypes: [object objectForKey:@"eventTypes"]];
+  
   
   UILabel *eventNameLbl	  = (UILabel *)[cell.contentView viewWithTag:1];
   UILabel *eventPlaceLbl  = (UILabel *)[cell.contentView viewWithTag:2];
