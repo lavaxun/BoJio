@@ -21,6 +21,11 @@
 		5A1C8919193074110078ADA4 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5A1C88FB193074110078ADA4 /* UIKit.framework */; };
 		5A1C8921193074110078ADA4 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 5A1C891F193074110078ADA4 /* InfoPlist.strings */; };
 		5A1C8923193074110078ADA4 /* BojioTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A1C8922193074110078ADA4 /* BojioTests.m */; };
+		5A1C892E193076EE0078ADA4 /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A1C892D193076EE0078ADA4 /* LoginViewController.m */; };
+		5A1C8931193076FD0078ADA4 /* HomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A1C8930193076FD0078ADA4 /* HomeViewController.m */; };
+		5A1C89341930770B0078ADA4 /* CreateEventViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A1C89331930770B0078ADA4 /* CreateEventViewController.m */; };
+		5A1C89371930771D0078ADA4 /* EventDetailsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A1C89361930771D0078ADA4 /* EventDetailsViewController.m */; };
+		5A1C893A193077340078ADA4 /* ProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A1C8939193077340078ADA4 /* ProfileViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -53,6 +58,16 @@
 		5A1C891E193074110078ADA4 /* BojioTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "BojioTests-Info.plist"; sourceTree = "<group>"; };
 		5A1C8920193074110078ADA4 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		5A1C8922193074110078ADA4 /* BojioTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BojioTests.m; sourceTree = "<group>"; };
+		5A1C892C193076EE0078ADA4 /* LoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginViewController.h; sourceTree = "<group>"; };
+		5A1C892D193076EE0078ADA4 /* LoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginViewController.m; sourceTree = "<group>"; };
+		5A1C892F193076FD0078ADA4 /* HomeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HomeViewController.h; sourceTree = "<group>"; };
+		5A1C8930193076FD0078ADA4 /* HomeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HomeViewController.m; sourceTree = "<group>"; };
+		5A1C89321930770B0078ADA4 /* CreateEventViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CreateEventViewController.h; sourceTree = "<group>"; };
+		5A1C89331930770B0078ADA4 /* CreateEventViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CreateEventViewController.m; sourceTree = "<group>"; };
+		5A1C89351930771D0078ADA4 /* EventDetailsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EventDetailsViewController.h; sourceTree = "<group>"; };
+		5A1C89361930771D0078ADA4 /* EventDetailsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EventDetailsViewController.m; sourceTree = "<group>"; };
+		5A1C8938193077340078ADA4 /* ProfileViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProfileViewController.h; sourceTree = "<group>"; };
+		5A1C8939193077340078ADA4 /* ProfileViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProfileViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -117,6 +132,16 @@
 				5A1C8909193074110078ADA4 /* Main.storyboard */,
 				5A1C890C193074110078ADA4 /* ViewController.h */,
 				5A1C890D193074110078ADA4 /* ViewController.m */,
+				5A1C892C193076EE0078ADA4 /* LoginViewController.h */,
+				5A1C892D193076EE0078ADA4 /* LoginViewController.m */,
+				5A1C892F193076FD0078ADA4 /* HomeViewController.h */,
+				5A1C8930193076FD0078ADA4 /* HomeViewController.m */,
+				5A1C89321930770B0078ADA4 /* CreateEventViewController.h */,
+				5A1C89331930770B0078ADA4 /* CreateEventViewController.m */,
+				5A1C89351930771D0078ADA4 /* EventDetailsViewController.h */,
+				5A1C89361930771D0078ADA4 /* EventDetailsViewController.m */,
+				5A1C8938193077340078ADA4 /* ProfileViewController.h */,
+				5A1C8939193077340078ADA4 /* ProfileViewController.m */,
 				5A1C890F193074110078ADA4 /* Images.xcassets */,
 				5A1C88FE193074110078ADA4 /* Supporting Files */,
 			);
@@ -249,8 +274,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5A1C892E193076EE0078ADA4 /* LoginViewController.m in Sources */,
+				5A1C89341930770B0078ADA4 /* CreateEventViewController.m in Sources */,
+				5A1C893A193077340078ADA4 /* ProfileViewController.m in Sources */,
+				5A1C89371930771D0078ADA4 /* EventDetailsViewController.m in Sources */,
 				5A1C890E193074110078ADA4 /* ViewController.m in Sources */,
 				5A1C8908193074110078ADA4 /* AppDelegate.m in Sources */,
+				5A1C8931193076FD0078ADA4 /* HomeViewController.m in Sources */,
 				5A1C8904193074110078ADA4 /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
