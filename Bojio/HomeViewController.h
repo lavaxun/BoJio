@@ -9,10 +9,13 @@
 #import <UIKit/UIKit.h>
 #import <Parse/Parse.h>
 
+//PFQueryTableViewController
 
-@interface HomeViewController : PFQueryTableViewController {
+@interface HomeViewController : UIViewController <UITableViewDelegate, UITableViewDataSource>  {
   
   
 }
+
+@property (nonatomic, strong) IBOutlet UITableView *aTableView;
 
 @end

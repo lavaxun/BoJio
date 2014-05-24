@@ -37,7 +37,7 @@
   
  
   // Create PFObject with recipe information
-  PFObject *event = [PFObject objectWithClassName:@"user_events"];
+  PFObject *event = [PFObject objectWithClassName:@"User_events"];
   [event setObject:@"Test Event" forKey:@"title"];
   [event setObject:@"Summary" forKey:@"summary"];
 

@@ -98,13 +98,17 @@
                     NSString *facebookID = userData[@"id"];
                     NSString *email = userData[@"email"];
                     NSString *displayName = userData[@"name"];
+                    NSURL *pictureURL = [NSURL URLWithString:[NSString stringWithFormat:@"https://graph.facebook.com/%@/picture?type=large&return_ssl_resources=1", facebookID]];
                     
                     [[PFUser currentUser] setObject:facebookID forKey:@"facebook_id"];
                     [[PFUser currentUser] setObject:email forKey:@"email"];
                     [[PFUser currentUser] setObject:displayName forKey:@"display_name"];
+                    [[PFUser currentUser] setObject:[pictureURL absoluteString] forKey:@"profile_picture"];
+                    
                     [[PFUser currentUser] saveInBackground];
                     
-                    [FBRequestConnection startWithGraphPath:@"me/friends" completionHandler:^(FBRequestConnection *connection, id result, NSError *error) {
+                     [FBRequestConnection startWithGraphPath:@"/me/taggable_friends" parameters:nil HTTPMethod:@"GET" completionHandler:^(FBRequestConnection *connection, id result, NSError *error) {
+
                         if (!error && result)
                         {
                             NSArray* friends = [[NSArray alloc] initWithArray:[result objectForKey:@"data"]];
@@ -116,7 +120,7 @@
                             
                             PFObject *userRelationObject = [PFObject objectWithClassName:@"User_relations"];
                             userRelationObject[@"relations"] = friendList;
-                            userRelationObject[@"parent"] = [PFUser currentUser].objectId;
+                            userRelationObject[@"parent"] = [PFUser currentUser];
                             [userRelationObject saveInBackground];
                             
                             PFQuery *query = [PFQuery queryWithClassName:@"User"];
