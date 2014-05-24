@@ -24,38 +24,24 @@
     
     [PFFacebookUtils initializeFacebook];
     
-    // fb app id 284315155080351
-    // Override point for customization after application launch.
-  //Sample Test
-  
-	
-  
+    [[UINavigationBar appearance] setBarTintColor: [UIColor colorWithRed:79/255.0f green:59/255.0f blue:59/255.0f alpha:1.0]];
+    [[UINavigationBar appearance] setTintColor:[UIColor whiteColor]];
+    [[UINavigationBar appearance] setTitleTextAttributes:@{NSForegroundColorAttributeName:[UIColor whiteColor]}];
+  // [UIColor colorWithRed:54/255.0f green:28/255.0f blue:18/255.0f alpha:1.0]
     return YES;
 }
 
--(void)loadUserInterests {
+-(NSString *)formatDate : (NSDate *)date {
+  NSString *dateStr = @"";
   
-  //------------------ Load the Users --------------------------
-  PFQuery *query = [PFQuery queryWithClassName:@"Store_interest"];
+  NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+  [dateFormatter setLocale:[NSLocale localeWithLocaleIdentifier:@"en_US"]];
+  [dateFormatter setDateFormat:@"dd-MMM-YYYY hh:mm:ss a"];
+  //  [dateFormatter setDateFormat:@"YYYY-MM-dd HH:mm:ss"];
+  dateStr = [dateFormatter stringFromDate:date];
   
-  [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
-	if (!error) {
-	  // The find succeeded.
-	  NSLog(@"Successfully retrieved %d interests.", objects.count);
-	  // Do something with the found objects
-	  
-	  
-	  AppDelegate *delegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
-	  delegate.userInterests = [NSMutableArray arrayWithArray: objects];
-	  
-	  NSLog(@"userInterests : %@", delegate.userInterests);
-	  
-	  
-	} else {
-	  // Log details of the failure
-	  NSLog(@"UserInterests Error: %@ %@", error, [error userInfo]);
-	}
-  }];
+  NSLog(@"DateStr : %@", dateStr);
+  return  dateStr;
 }
 
 

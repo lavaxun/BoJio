@@ -11,6 +11,7 @@
 
 @interface ProfileViewController () <UITableViewDataSource, UITableViewDelegate>
 {
+    GPUImageiOSBlurFilter *_blurFilter;
     NSDateFormatter *_dateFormatter;
     NSArray* _activities;
 }
@@ -33,6 +34,22 @@
     // If the user is already logged in, display any previously cached values before we get the latest from Facebook.
     if ([PFUser currentUser]) {
         [self updateProfile];
+    }
+    
+    if(!_blurFilter){
+        _blurFilter = [[GPUImageiOSBlurFilter alloc] init];
+        _blurFilter.blurRadiusInPixels = 1.0f;
+    }
+    
+    UIImage* picture = [UIImage imageNamed:@"cover.jpg"];
+    GPUImagePicture* gpuPicture = [[GPUImagePicture alloc] initWithImage:picture];
+    [gpuPicture addTarget:_blurFilter];
+    [_blurFilter addTarget:self.coverPhoto];
+    [self.coverPhoto setFillMode:kGPUImageFillModePreserveAspectRatioAndFill];
+    [gpuPicture processImage];
+    
+    if(!_dateFormatter){
+        _dateFormatter = [[NSDateFormatter alloc] init];
     }
     
     self.activityTable.delegate = self;
@@ -97,10 +114,6 @@
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:identifier];
     if(cell == nil) {
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:identifier];
-    }
-    
-    if(!_dateFormatter){
-        _dateFormatter = [[NSDateFormatter alloc] init];
     }
     
     PFObject *object = [_activities objectAtIndex:indexPath.row];

@@ -48,6 +48,7 @@
 		A1E5D2DA1930FCCF0025E09C /* user-default-placeholder.png in Resources */ = {isa = PBXBuildFile; fileRef = A1E5D2D61930FCCF0025E09C /* user-default-placeholder.png */; };
 		A1E5D2DD1930FF2B0025E09C /* gym.jpg in Resources */ = {isa = PBXBuildFile; fileRef = A1E5D2DB1930FF2B0025E09C /* gym.jpg */; };
 		A1E5D2DE1930FF2B0025E09C /* meal.jpg in Resources */ = {isa = PBXBuildFile; fileRef = A1E5D2DC1930FF2B0025E09C /* meal.jpg */; };
+		A1E5D2E0193112930025E09C /* cover.jpg in Resources */ = {isa = PBXBuildFile; fileRef = A1E5D2DF193112930025E09C /* cover.jpg */; };
 		BE4FD90E8E9A4500AF540359 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C9B4C4BA84C54AD78D377EA1 /* libPods.a */; };
 /* End PBXBuildFile section */
 
@@ -115,6 +116,7 @@
 		A1E5D2D61930FCCF0025E09C /* user-default-placeholder.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "user-default-placeholder.png"; sourceTree = "<group>"; };
 		A1E5D2DB1930FF2B0025E09C /* gym.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = gym.jpg; sourceTree = "<group>"; };
 		A1E5D2DC1930FF2B0025E09C /* meal.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = meal.jpg; sourceTree = "<group>"; };
+		A1E5D2DF193112930025E09C /* cover.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = cover.jpg; sourceTree = "<group>"; };
 		C9B4C4BA84C54AD78D377EA1 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -234,6 +236,7 @@
 		5A1C88FE193074110078ADA4 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				A1E5D2DF193112930025E09C /* cover.jpg */,
 				A1E5D2DB1930FF2B0025E09C /* gym.jpg */,
 				A1E5D2DC1930FF2B0025E09C /* meal.jpg */,
 				A1E5D2D31930FCCF0025E09C /* bojio.jpg */,
@@ -352,6 +355,7 @@
 				A189A39F1930C797006DF3FE /* FBUserSettingsViewResources.bundle in Resources */,
 				A1E5D2DD1930FF2B0025E09C /* gym.jpg in Resources */,
 				A1E5D2D71930FCCF0025E09C /* bojio.jpg in Resources */,
+				A1E5D2E0193112930025E09C /* cover.jpg in Resources */,
 				5A1C8910193074110078ADA4 /* Images.xcassets in Resources */,
 				A1E5D2DE1930FF2B0025E09C /* meal.jpg in Resources */,
 				5A1C8902193074110078ADA4 /* InfoPlist.strings in Resources */,
