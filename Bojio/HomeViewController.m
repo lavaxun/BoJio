@@ -59,6 +59,7 @@
 -(void)logoutAction
 {
     [PFUser logOut];
+    [self.navigationController popToRootViewControllerAnimated:YES];
 }
 
 #pragma mark -

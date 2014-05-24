@@ -48,25 +48,6 @@
     // Dispose of any resources that can be recreated.
 }
 
-
-#pragma mark - PFLogInViewControllerDelegate
-
-// Sent to the delegate when a PFUser is logged in.
-- (void)logInViewController:(PFLogInViewController *)logInController didLogInUser:(PFUser *)user {
-    [self dismissViewControllerAnimated:YES completion:NULL];
-}
-
-// Sent to the delegate when the log in attempt fails.
-- (void)logInViewController:(PFLogInViewController *)logInController didFailToLogInWithError:(NSError *)error {
-    NSLog(@"Failed to log in...");
-}
-
-// Sent to the delegate when the log in screen is dismissed.
-- (void)logInViewControllerDidCancelLogIn:(PFLogInViewController *)logInController {
-    NSLog(@"User dismissed the logInViewController");
-}
-
-
 /*
 #pragma mark - Navigation
 
@@ -92,16 +73,23 @@
         if (!user) {
             if (!error) {
                 NSLog(@"Uh oh. The user cancelled the Facebook login.");
+                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Log In Error" message:@"Uh oh. The user cancelled the Facebook login." delegate:nil cancelButtonTitle:nil otherButtonTitles:@"Dismiss", nil];
+                [alert show];
             } else {
                 NSLog(@"Uh oh. An error occurred: %@", error);
+                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Log In Error" message:[error description] delegate:nil cancelButtonTitle:nil otherButtonTitles:@"Dismiss", nil];
+                [alert show];
             }
         } else if (user.isNew) {
             NSLog(@"User with facebook signed up and logged in!");
             [self performSegueWithIdentifier:@"after_login" sender:self];
+
         } else {
             NSLog(@"User with facebook logged in!");
             [self performSegueWithIdentifier:@"after_login" sender:self];
+
         }
+        
     }];
 }
 
