@@ -7,8 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		5A0A9603193099710063384F /* FacebookSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5A0A9602193099710063384F /* FacebookSDK.framework */; };
-		5A0A96051930997F0063384F /* FBUserSettingsViewResources.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 5A0A96041930997F0063384F /* FBUserSettingsViewResources.bundle */; };
 		5A1C88FC193074110078ADA4 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5A1C88FB193074110078ADA4 /* UIKit.framework */; };
 		5A1C8902193074110078ADA4 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 5A1C8900193074110078ADA4 /* InfoPlist.strings */; };
 		5A1C8904193074110078ADA4 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A1C8903193074110078ADA4 /* main.m */; };
@@ -43,7 +41,17 @@
 		A189A38919307B2A006DF3FE /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A189A37819307B29006DF3FE /* StoreKit.framework */; };
 		A189A38A19307B2A006DF3FE /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A189A37919307B29006DF3FE /* SystemConfiguration.framework */; };
 		A189A38B19307B2A006DF3FE /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A189A37A19307B29006DF3FE /* UIKit.framework */; };
-		A189A393193082E9006DF3FE /* Social.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A189A392193082E9006DF3FE /* Social.framework */; };
+		A189A39F1930C797006DF3FE /* FBUserSettingsViewResources.bundle in Resources */ = {isa = PBXBuildFile; fileRef = A189A39E1930C797006DF3FE /* FBUserSettingsViewResources.bundle */; };
+		A189A3A11930DAC7006DF3FE /* Social.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A189A3A01930DAC7006DF3FE /* Social.framework */; };
+		A189A3A31930DB4F006DF3FE /* FacebookSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A189A3A21930DB4F006DF3FE /* FacebookSDK.framework */; };
+		A1E5D2EE193132360025E09C /* bojio.jpg in Resources */ = {isa = PBXBuildFile; fileRef = A1E5D2E8193132360025E09C /* bojio.jpg */; };
+		A1E5D2EF193132360025E09C /* cover.jpg in Resources */ = {isa = PBXBuildFile; fileRef = A1E5D2E9193132360025E09C /* cover.jpg */; };
+		A1E5D2F0193132360025E09C /* gym.jpg in Resources */ = {isa = PBXBuildFile; fileRef = A1E5D2EA193132360025E09C /* gym.jpg */; };
+		A1E5D2F1193132360025E09C /* hangout.jpg in Resources */ = {isa = PBXBuildFile; fileRef = A1E5D2EB193132360025E09C /* hangout.jpg */; };
+		A1E5D2F2193132360025E09C /* meal.jpg in Resources */ = {isa = PBXBuildFile; fileRef = A1E5D2EC193132360025E09C /* meal.jpg */; };
+		A1E5D2F3193132360025E09C /* movie.jpg in Resources */ = {isa = PBXBuildFile; fileRef = A1E5D2ED193132360025E09C /* movie.jpg */; };
+		A1E5D2F51931324B0025E09C /* user-default-placeholder.png in Resources */ = {isa = PBXBuildFile; fileRef = A1E5D2F41931324B0025E09C /* user-default-placeholder.png */; };
+		BE4FD90E8E9A4500AF540359 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C9B4C4BA84C54AD78D377EA1 /* libPods.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -57,8 +65,6 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		5A0A9602193099710063384F /* FacebookSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FacebookSDK.framework; path = ../../Documents/FacebookSDK/FacebookSDK.framework; sourceTree = "<group>"; };
-		5A0A96041930997F0063384F /* FBUserSettingsViewResources.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; name = FBUserSettingsViewResources.bundle; path = ../../Documents/FacebookSDK/FacebookSDK.framework/Versions/A/Resources/FBUserSettingsViewResources.bundle; sourceTree = "<group>"; };
 		5A1C88F4193074100078ADA4 /* Bojio.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Bojio.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5A1C88FB193074110078ADA4 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		5A1C88FF193074110078ADA4 /* Bojio-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Bojio-Info.plist"; sourceTree = "<group>"; };
@@ -86,8 +92,7 @@
 		5A1C89361930771D0078ADA4 /* EventDetailsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EventDetailsViewController.m; sourceTree = "<group>"; };
 		5A1C8938193077340078ADA4 /* ProfileViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProfileViewController.h; sourceTree = "<group>"; };
 		5A1C8939193077340078ADA4 /* ProfileViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProfileViewController.m; sourceTree = "<group>"; };
-		5A41444E1931121F007C0608 /* green.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = green.png; sourceTree = "<group>"; };
-		5A41444F1931121F007C0608 /* red.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = red.png; sourceTree = "<group>"; };
+		9A0AD4E8558A40C68033DCB3 /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = "<group>"; };
 		A189A36819307A2A006DF3FE /* Parse.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Parse.framework; sourceTree = "<group>"; };
 		A189A36A19307B29006DF3FE /* AdSupport.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AdSupport.framework; path = System/Library/Frameworks/AdSupport.framework; sourceTree = SDKROOT; };
 		A189A36C19307B29006DF3FE /* Accounts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accounts.framework; path = System/Library/Frameworks/Accounts.framework; sourceTree = SDKROOT; };
@@ -104,7 +109,17 @@
 		A189A37819307B29006DF3FE /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
 		A189A37919307B29006DF3FE /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		A189A37A19307B29006DF3FE /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
-		A189A392193082E9006DF3FE /* Social.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Social.framework; path = System/Library/Frameworks/Social.framework; sourceTree = SDKROOT; };
+		A189A39E1930C797006DF3FE /* FBUserSettingsViewResources.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; name = FBUserSettingsViewResources.bundle; path = ../../Documents/FacebookSDK/FacebookSDK.framework/Versions/A/Resources/FBUserSettingsViewResources.bundle; sourceTree = "<group>"; };
+		A189A3A01930DAC7006DF3FE /* Social.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Social.framework; path = System/Library/Frameworks/Social.framework; sourceTree = SDKROOT; };
+		A189A3A21930DB4F006DF3FE /* FacebookSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FacebookSDK.framework; path = ../../Documents/FacebookSDK/FacebookSDK.framework; sourceTree = "<group>"; };
+		A1E5D2E8193132360025E09C /* bojio.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = bojio.jpg; sourceTree = "<group>"; };
+		A1E5D2E9193132360025E09C /* cover.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = cover.jpg; sourceTree = "<group>"; };
+		A1E5D2EA193132360025E09C /* gym.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = gym.jpg; sourceTree = "<group>"; };
+		A1E5D2EB193132360025E09C /* hangout.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = hangout.jpg; sourceTree = "<group>"; };
+		A1E5D2EC193132360025E09C /* meal.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = meal.jpg; sourceTree = "<group>"; };
+		A1E5D2ED193132360025E09C /* movie.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = movie.jpg; sourceTree = "<group>"; };
+		A1E5D2F41931324B0025E09C /* user-default-placeholder.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "user-default-placeholder.png"; sourceTree = "<group>"; };
+		C9B4C4BA84C54AD78D377EA1 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -112,8 +127,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A189A393193082E9006DF3FE /* Social.framework in Frameworks */,
-				5A0A9603193099710063384F /* FacebookSDK.framework in Frameworks */,
+				A189A3A11930DAC7006DF3FE /* Social.framework in Frameworks */,
+				A189A3A31930DB4F006DF3FE /* FacebookSDK.framework in Frameworks */,
 				A189A38119307B29006DF3FE /* CoreLocation.framework in Frameworks */,
 				A189A38B19307B2A006DF3FE /* UIKit.framework in Frameworks */,
 				A189A38A19307B2A006DF3FE /* SystemConfiguration.framework in Frameworks */,
@@ -131,6 +146,7 @@
 				A189A38519307B29006DF3FE /* MobileCoreServices.framework in Frameworks */,
 				A189A38019307B29006DF3FE /* CoreGraphics.framework in Frameworks */,
 				A189A37B19307B29006DF3FE /* AdSupport.framework in Frameworks */,
+				BE4FD90E8E9A4500AF540359 /* libPods.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -154,6 +170,7 @@
 				5A1C891C193074110078ADA4 /* BojioTests */,
 				5A1C88F6193074100078ADA4 /* Frameworks */,
 				5A1C88F5193074100078ADA4 /* Products */,
+				9A0AD4E8558A40C68033DCB3 /* Pods.xcconfig */,
 			);
 			sourceTree = "<group>";
 		};
@@ -169,9 +186,9 @@
 		5A1C88F6193074100078ADA4 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				5A0A96041930997F0063384F /* FBUserSettingsViewResources.bundle */,
-				5A0A9602193099710063384F /* FacebookSDK.framework */,
-				A189A392193082E9006DF3FE /* Social.framework */,
+				A189A3A21930DB4F006DF3FE /* FacebookSDK.framework */,
+				A189A3A01930DAC7006DF3FE /* Social.framework */,
+				A189A39E1930C797006DF3FE /* FBUserSettingsViewResources.bundle */,
 				A189A36A19307B29006DF3FE /* AdSupport.framework */,
 				A189A36C19307B29006DF3FE /* Accounts.framework */,
 				A189A36D19307B29006DF3FE /* AudioToolbox.framework */,
@@ -190,6 +207,7 @@
 				A189A36819307A2A006DF3FE /* Parse.framework */,
 				5A1C88FB193074110078ADA4 /* UIKit.framework */,
 				5A1C8916193074110078ADA4 /* XCTest.framework */,
+				C9B4C4BA84C54AD78D377EA1 /* libPods.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -221,6 +239,13 @@
 		5A1C88FE193074110078ADA4 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				A1E5D2F41931324B0025E09C /* user-default-placeholder.png */,
+				A1E5D2E8193132360025E09C /* bojio.jpg */,
+				A1E5D2E9193132360025E09C /* cover.jpg */,
+				A1E5D2EA193132360025E09C /* gym.jpg */,
+				A1E5D2EB193132360025E09C /* hangout.jpg */,
+				A1E5D2EC193132360025E09C /* meal.jpg */,
+				A1E5D2ED193132360025E09C /* movie.jpg */,
 				5A1C88FF193074110078ADA4 /* Bojio-Info.plist */,
 				5A1C8900193074110078ADA4 /* InfoPlist.strings */,
 				5A1C8903193074110078ADA4 /* main.m */,
@@ -263,9 +288,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 5A1C8926193074110078ADA4 /* Build configuration list for PBXNativeTarget "Bojio" */;
 			buildPhases = (
+				B813A4A770BE48FB97DAA9DD /* Check Pods Manifest.lock */,
 				5A1C88F0193074100078ADA4 /* Sources */,
 				5A1C88F1193074100078ADA4 /* Frameworks */,
 				5A1C88F2193074100078ADA4 /* Resources */,
+				648CC4E5CE3149C4948FE07C /* Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -303,6 +330,9 @@
 				LastUpgradeCheck = 0510;
 				ORGANIZATIONNAME = Biranchi;
 				TargetAttributes = {
+					5A1C88F3193074100078ADA4 = {
+						DevelopmentTeam = 8M8KKU9WRP;
+					};
 					5A1C8914193074110078ADA4 = {
 						TestTargetID = 5A1C88F3193074100078ADA4;
 					};
@@ -332,10 +362,15 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				5A0A96051930997F0063384F /* FBUserSettingsViewResources.bundle in Resources */,
+				A1E5D2F1193132360025E09C /* hangout.jpg in Resources */,
+				A1E5D2F51931324B0025E09C /* user-default-placeholder.png in Resources */,
+				A189A39F1930C797006DF3FE /* FBUserSettingsViewResources.bundle in Resources */,
+				A1E5D2EE193132360025E09C /* bojio.jpg in Resources */,
+				A1E5D2F0193132360025E09C /* gym.jpg in Resources */,
+				A1E5D2F2193132360025E09C /* meal.jpg in Resources */,
 				5A1C8910193074110078ADA4 /* Images.xcassets in Resources */,
-				5A4144501931121F007C0608 /* green.png in Resources */,
-				5A4144511931121F007C0608 /* red.png in Resources */,
+				A1E5D2F3193132360025E09C /* movie.jpg in Resources */,
+				A1E5D2EF193132360025E09C /* cover.jpg in Resources */,
 				5A1C8902193074110078ADA4 /* InfoPlist.strings in Resources */,
 				5A1C890B193074110078ADA4 /* Main.storyboard in Resources */,
 			);
@@ -350,6 +385,39 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		648CC4E5CE3149C4948FE07C /* Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Pods-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		B813A4A770BE48FB97DAA9DD /* Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		5A1C88F0193074100078ADA4 /* Sources */ = {
@@ -485,9 +553,11 @@
 		};
 		5A1C8927193074110078ADA4 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 9A0AD4E8558A40C68033DCB3 /* Pods.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_IDENTITY = "iPhone Developer: Susanta Behera (7CU89NWF6Y)";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
@@ -498,16 +568,20 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Bojio/Bojio-Prefix.pch";
 				INFOPLIST_FILE = "Bojio/Bojio-Info.plist";
+				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "EC6E7AA8-E224-4508-A2FC-D7002043E8F2";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
 		};
 		5A1C8928193074110078ADA4 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 9A0AD4E8558A40C68033DCB3 /* Pods.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_IDENTITY = "iPhone Developer: Susanta Behera (7CU89NWF6Y)";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
@@ -518,7 +592,9 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Bojio/Bojio-Prefix.pch";
 				INFOPLIST_FILE = "Bojio/Bojio-Info.plist";
+				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "EC6E7AA8-E224-4508-A2FC-D7002043E8F2";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;

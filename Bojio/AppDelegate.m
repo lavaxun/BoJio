@@ -17,20 +17,19 @@
     // [[PFUser currentUser] objectId]
 
     [Parse setApplicationId:@"Yi325bn8AIUm3a6BkE02BAzfOvjjVZCgdishElTt" clientKey:@"eSIvsSwDlEi2h9yawgZYeocCOeyCq545oWy5Azfl"];
-  
-
-  
+    
+    [application registerForRemoteNotificationTypes:UIRemoteNotificationTypeBadge|
+     UIRemoteNotificationTypeAlert|
+     UIRemoteNotificationTypeSound];
+    
     [PFFacebookUtils initializeFacebook];
     
-    // fb app id 284315155080351
-    // Override point for customization after application launch.
-  //Sample Test
-  
-  
+    [[UINavigationBar appearance] setBarTintColor: [UIColor colorWithRed:79/255.0f green:59/255.0f blue:59/255.0f alpha:1.0]];
+    [[UINavigationBar appearance] setTintColor:[UIColor whiteColor]];
+    [[UINavigationBar appearance] setTitleTextAttributes:@{NSForegroundColorAttributeName:[UIColor whiteColor]}];
+  // [UIColor colorWithRed:54/255.0f green:28/255.0f blue:18/255.0f alpha:1.0]
     return YES;
 }
-
-
 
 -(NSString *)formatDate : (NSDate *)date {
   NSString *dateStr = @"";
@@ -81,5 +80,24 @@
                   sourceApplication:sourceApplication
                         withSession:[PFFacebookUtils session]];
 }
+
+
+#pragma mark - Push notification
+
+- (void)application:(UIApplication *)application
+didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)newDeviceToken {
+    // Store the deviceToken in the current installation and save it to Parse.
+    PFInstallation *currentInstallation = [PFInstallation currentInstallation];
+    [currentInstallation setDeviceTokenFromData:newDeviceToken];
+    [currentInstallation saveInBackground];
+}
+
+
+- (void)application:(UIApplication *)application
+didReceiveRemoteNotification:(NSDictionary *)userInfo {
+    [PFPush handlePush:userInfo];
+}
+
+
 
 @end

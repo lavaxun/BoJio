@@ -32,13 +32,46 @@
     if ([PFUser currentUser] && // Check if a user is cached
         [PFFacebookUtils isLinkedWithUser:[PFUser currentUser]]) // Check if user is linked to Facebook
     {
-	  	  
+        /*
+         //------------------ Load the User Interests --------------------------
+         AppDelegate *delegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
+         [delegate loadUserInterests];
+         
+         
+         
+         //------------------ Load the Users --------------------------
+         PFQuery *query = [PFQuery queryWithClassName:@"User"];
+         [query whereKey:@"username" equalTo:[PFUser currentUser].username];
+         
+         [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
+         if (!error) {
+         // The find succeeded.
+         NSLog(@"Successfully retrieved %d users.", objects.count);
+         // Do something with the found objects
+         
+         if (objects.count) {
+         
+         PFObject *object = [objects objectAtIndex:0];
+         delegate.objectIdForLoggedInUser = PFUser currentUserobject.objectId;
+         
+         NSLog(@"UserObjectId : %@", object.objectId);
+         
+         }
+         
+         
+         
+         } else {
+         // Log details of the failure
+         NSLog(@"Error: %@ %@", error, [error userInfo]);
+         }
+         }];
+         
+         */
+	  
         [self performSegueWithIdentifier:@"after_login" sender:self];
 	  
     }else{
-	  
-	  ;
-	  
+	  	  
     }
 }
 
@@ -87,10 +120,6 @@
                 [alert show];
             }
         } else if (user.isNew) {
-            NSLog(@"User with facebook signed up and logged in!");
-            [self performSegueWithIdentifier:@"after_login" sender:self];
-        } else {
-            
             // Create request for user's Facebook data
             FBRequest *request = [FBRequest requestForMe];
             
@@ -112,8 +141,8 @@
                     
                     [[PFUser currentUser] saveInBackground];
                     
-                     [FBRequestConnection startWithGraphPath:@"/me/taggable_friends" parameters:nil HTTPMethod:@"GET" completionHandler:^(FBRequestConnection *connection, id result, NSError *error) {
-
+                    [FBRequestConnection startWithGraphPath:@"/me/taggable_friends" parameters:nil HTTPMethod:@"GET" completionHandler:^(FBRequestConnection *connection, id result, NSError *error) {
+                        
                         if (!error && result)
                         {
                             NSArray* friends = [[NSArray alloc] initWithArray:[result objectForKey:@"data"]];
@@ -140,7 +169,7 @@
                                 }
                             }];
                             [userRelationObject saveInBackground];
-
+                            
                         }
                     }];
                     
@@ -151,8 +180,13 @@
                 }else{
                     NSLog(@"has error");
                 }
+                
+                // signed up with facebook
+                NSLog(@"User with facebook signed up and logged in!");
+                [self performSegueWithIdentifier:@"after_login" sender:self];
             }];
             
+        } else {
             NSLog(@"User with facebook logged in!");
             [self performSegueWithIdentifier:@"after_login" sender:self];
 
