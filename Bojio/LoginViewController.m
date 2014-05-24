@@ -31,8 +31,9 @@
     if ([PFUser currentUser] && // Check if a user is cached
         [PFFacebookUtils isLinkedWithUser:[PFUser currentUser]]) // Check if user is linked to Facebook
     {
-        // Push the next view controller without animation
         [self performSegueWithIdentifier:@"after_login" sender:self];
+    }else{
+        //
     }
 }
 
@@ -64,7 +65,7 @@
     self.activityIndicator.hidden = NO;
     
     // The permissions requested from the user
-    NSArray *permissionsArray = @[ @"user_about_me", @"user_relationships", @"user_birthday", @"user_location"];
+    NSArray *permissionsArray = @[ @"email", @"user_friends"];
     
     // Login PFUser using Facebook
     [PFFacebookUtils logInWithPermissions:permissionsArray block:^(PFUser *user, NSError *error) {
@@ -83,8 +84,68 @@
         } else if (user.isNew) {
             NSLog(@"User with facebook signed up and logged in!");
             [self performSegueWithIdentifier:@"after_login" sender:self];
-
         } else {
+            
+            // Create request for user's Facebook data
+            FBRequest *request = [FBRequest requestForMe];
+            
+            // Send request to Facebook
+            [request startWithCompletionHandler:^(FBRequestConnection *connection, id result, NSError *error) {
+                // handle response
+                if(!error){
+                    NSDictionary *userData = (NSDictionary*)result;
+                    
+                    NSString *facebookID = userData[@"id"];
+                    NSString *email = userData[@"email"];
+                    NSString *displayName = userData[@"name"];
+                    
+                    [[PFUser currentUser] setObject:facebookID forKey:@"facebook_id"];
+                    [[PFUser currentUser] setObject:email forKey:@"email"];
+                    [[PFUser currentUser] setObject:displayName forKey:@"display_name"];
+                    [[PFUser currentUser] saveInBackground];
+                    
+                    [FBRequestConnection startWithGraphPath:@"me/friends" completionHandler:^(FBRequestConnection *connection, id result, NSError *error) {
+                        
+                        if (!error && result)
+                        {
+                            NSArray* friends = [[NSArray alloc] initWithArray:[result objectForKey:@"data"]];
+                            NSMutableArray* friendList = [[NSMutableArray alloc] initWithCapacity:[friends count]];
+                            
+                            for (NSDictionary<FBGraphUser>* friend in friends) {
+                                [friendList addObject:[friend objectID]];
+                            }
+                            
+                            PFObject *userRelationObject = [PFObject objectWithClassName:@"User_relations"];
+                            userRelationObject[@"relations"] = friendList;
+                            userRelationObject[@"parent"] = [PFUser currentUser].objectId;
+                            [userRelationObject saveInBackground];
+                            
+                            PFQuery *query = [PFQuery queryWithClassName:@"User"];
+                            [query whereKey:@"facebook_id" containedIn:friendList];
+                            
+                            [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
+                                if (!error) {
+                                    NSLog(@"Successfully retrieved %d scores.", objects.count);
+                                    for (PFObject *object in objects) {
+                                        NSLog(@"%@", object.objectId);
+                                    }
+                                } else {
+                                    // Log details of the failure
+                                    NSLog(@"Error: %@ %@", error, [error userInfo]);
+                                }
+                            }];
+                        }
+                    }];
+                    
+                    NSLog(@"requested from fb");
+                }else if ([error.userInfo[FBErrorParsedJSONResponseKey][@"body"][@"error"][@"type"] isEqualToString:@"OAuthException"]){
+                    NSLog(@"Invalid oauth");
+                    [PFUser logOut];
+                }else{
+                    NSLog(@"has error");
+                }
+            }];
+            
             NSLog(@"User with facebook logged in!");
             [self performSegueWithIdentifier:@"after_login" sender:self];
 

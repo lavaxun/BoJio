@@ -26,13 +26,22 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
+    // If the user is already logged in, display any previously cached values before we get the latest from Facebook.
+    if ([PFUser currentUser]) {
+        [self updateProfile];
+    }
 }
 
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+
+-(void)updateProfile
+{
+    
 }
 
 /*
