@@ -42,13 +42,13 @@
 		A189A39F1930C797006DF3FE /* FBUserSettingsViewResources.bundle in Resources */ = {isa = PBXBuildFile; fileRef = A189A39E1930C797006DF3FE /* FBUserSettingsViewResources.bundle */; };
 		A189A3A11930DAC7006DF3FE /* Social.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A189A3A01930DAC7006DF3FE /* Social.framework */; };
 		A189A3A31930DB4F006DF3FE /* FacebookSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A189A3A21930DB4F006DF3FE /* FacebookSDK.framework */; };
-		A1E5D2D71930FCCF0025E09C /* bojio.jpg in Resources */ = {isa = PBXBuildFile; fileRef = A1E5D2D31930FCCF0025E09C /* bojio.jpg */; };
-		A1E5D2D81930FCCF0025E09C /* hangout.jpg in Resources */ = {isa = PBXBuildFile; fileRef = A1E5D2D41930FCCF0025E09C /* hangout.jpg */; };
-		A1E5D2D91930FCCF0025E09C /* movie.jpg in Resources */ = {isa = PBXBuildFile; fileRef = A1E5D2D51930FCCF0025E09C /* movie.jpg */; };
-		A1E5D2DA1930FCCF0025E09C /* user-default-placeholder.png in Resources */ = {isa = PBXBuildFile; fileRef = A1E5D2D61930FCCF0025E09C /* user-default-placeholder.png */; };
-		A1E5D2DD1930FF2B0025E09C /* gym.jpg in Resources */ = {isa = PBXBuildFile; fileRef = A1E5D2DB1930FF2B0025E09C /* gym.jpg */; };
-		A1E5D2DE1930FF2B0025E09C /* meal.jpg in Resources */ = {isa = PBXBuildFile; fileRef = A1E5D2DC1930FF2B0025E09C /* meal.jpg */; };
-		A1E5D2E0193112930025E09C /* cover.jpg in Resources */ = {isa = PBXBuildFile; fileRef = A1E5D2DF193112930025E09C /* cover.jpg */; };
+		A1E5D2EE193132360025E09C /* bojio.jpg in Resources */ = {isa = PBXBuildFile; fileRef = A1E5D2E8193132360025E09C /* bojio.jpg */; };
+		A1E5D2EF193132360025E09C /* cover.jpg in Resources */ = {isa = PBXBuildFile; fileRef = A1E5D2E9193132360025E09C /* cover.jpg */; };
+		A1E5D2F0193132360025E09C /* gym.jpg in Resources */ = {isa = PBXBuildFile; fileRef = A1E5D2EA193132360025E09C /* gym.jpg */; };
+		A1E5D2F1193132360025E09C /* hangout.jpg in Resources */ = {isa = PBXBuildFile; fileRef = A1E5D2EB193132360025E09C /* hangout.jpg */; };
+		A1E5D2F2193132360025E09C /* meal.jpg in Resources */ = {isa = PBXBuildFile; fileRef = A1E5D2EC193132360025E09C /* meal.jpg */; };
+		A1E5D2F3193132360025E09C /* movie.jpg in Resources */ = {isa = PBXBuildFile; fileRef = A1E5D2ED193132360025E09C /* movie.jpg */; };
+		A1E5D2F51931324B0025E09C /* user-default-placeholder.png in Resources */ = {isa = PBXBuildFile; fileRef = A1E5D2F41931324B0025E09C /* user-default-placeholder.png */; };
 		BE4FD90E8E9A4500AF540359 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C9B4C4BA84C54AD78D377EA1 /* libPods.a */; };
 /* End PBXBuildFile section */
 
@@ -110,13 +110,13 @@
 		A189A39E1930C797006DF3FE /* FBUserSettingsViewResources.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; name = FBUserSettingsViewResources.bundle; path = ../../Documents/FacebookSDK/FacebookSDK.framework/Versions/A/Resources/FBUserSettingsViewResources.bundle; sourceTree = "<group>"; };
 		A189A3A01930DAC7006DF3FE /* Social.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Social.framework; path = System/Library/Frameworks/Social.framework; sourceTree = SDKROOT; };
 		A189A3A21930DB4F006DF3FE /* FacebookSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FacebookSDK.framework; path = ../../Documents/FacebookSDK/FacebookSDK.framework; sourceTree = "<group>"; };
-		A1E5D2D31930FCCF0025E09C /* bojio.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = bojio.jpg; sourceTree = "<group>"; };
-		A1E5D2D41930FCCF0025E09C /* hangout.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = hangout.jpg; sourceTree = "<group>"; };
-		A1E5D2D51930FCCF0025E09C /* movie.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = movie.jpg; sourceTree = "<group>"; };
-		A1E5D2D61930FCCF0025E09C /* user-default-placeholder.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "user-default-placeholder.png"; sourceTree = "<group>"; };
-		A1E5D2DB1930FF2B0025E09C /* gym.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = gym.jpg; sourceTree = "<group>"; };
-		A1E5D2DC1930FF2B0025E09C /* meal.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = meal.jpg; sourceTree = "<group>"; };
-		A1E5D2DF193112930025E09C /* cover.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = cover.jpg; sourceTree = "<group>"; };
+		A1E5D2E8193132360025E09C /* bojio.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = bojio.jpg; sourceTree = "<group>"; };
+		A1E5D2E9193132360025E09C /* cover.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = cover.jpg; sourceTree = "<group>"; };
+		A1E5D2EA193132360025E09C /* gym.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = gym.jpg; sourceTree = "<group>"; };
+		A1E5D2EB193132360025E09C /* hangout.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = hangout.jpg; sourceTree = "<group>"; };
+		A1E5D2EC193132360025E09C /* meal.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = meal.jpg; sourceTree = "<group>"; };
+		A1E5D2ED193132360025E09C /* movie.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = movie.jpg; sourceTree = "<group>"; };
+		A1E5D2F41931324B0025E09C /* user-default-placeholder.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "user-default-placeholder.png"; sourceTree = "<group>"; };
 		C9B4C4BA84C54AD78D377EA1 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -236,13 +236,13 @@
 		5A1C88FE193074110078ADA4 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				A1E5D2DF193112930025E09C /* cover.jpg */,
-				A1E5D2DB1930FF2B0025E09C /* gym.jpg */,
-				A1E5D2DC1930FF2B0025E09C /* meal.jpg */,
-				A1E5D2D31930FCCF0025E09C /* bojio.jpg */,
-				A1E5D2D41930FCCF0025E09C /* hangout.jpg */,
-				A1E5D2D51930FCCF0025E09C /* movie.jpg */,
-				A1E5D2D61930FCCF0025E09C /* user-default-placeholder.png */,
+				A1E5D2F41931324B0025E09C /* user-default-placeholder.png */,
+				A1E5D2E8193132360025E09C /* bojio.jpg */,
+				A1E5D2E9193132360025E09C /* cover.jpg */,
+				A1E5D2EA193132360025E09C /* gym.jpg */,
+				A1E5D2EB193132360025E09C /* hangout.jpg */,
+				A1E5D2EC193132360025E09C /* meal.jpg */,
+				A1E5D2ED193132360025E09C /* movie.jpg */,
 				5A1C88FF193074110078ADA4 /* Bojio-Info.plist */,
 				5A1C8900193074110078ADA4 /* InfoPlist.strings */,
 				5A1C8903193074110078ADA4 /* main.m */,
@@ -350,16 +350,16 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A1E5D2DA1930FCCF0025E09C /* user-default-placeholder.png in Resources */,
-				A1E5D2D91930FCCF0025E09C /* movie.jpg in Resources */,
+				A1E5D2F1193132360025E09C /* hangout.jpg in Resources */,
+				A1E5D2F51931324B0025E09C /* user-default-placeholder.png in Resources */,
 				A189A39F1930C797006DF3FE /* FBUserSettingsViewResources.bundle in Resources */,
-				A1E5D2DD1930FF2B0025E09C /* gym.jpg in Resources */,
-				A1E5D2D71930FCCF0025E09C /* bojio.jpg in Resources */,
-				A1E5D2E0193112930025E09C /* cover.jpg in Resources */,
+				A1E5D2EE193132360025E09C /* bojio.jpg in Resources */,
+				A1E5D2F0193132360025E09C /* gym.jpg in Resources */,
+				A1E5D2F2193132360025E09C /* meal.jpg in Resources */,
 				5A1C8910193074110078ADA4 /* Images.xcassets in Resources */,
-				A1E5D2DE1930FF2B0025E09C /* meal.jpg in Resources */,
+				A1E5D2F3193132360025E09C /* movie.jpg in Resources */,
+				A1E5D2EF193132360025E09C /* cover.jpg in Resources */,
 				5A1C8902193074110078ADA4 /* InfoPlist.strings in Resources */,
-				A1E5D2D81930FCCF0025E09C /* hangout.jpg in Resources */,
 				5A1C890B193074110078ADA4 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
