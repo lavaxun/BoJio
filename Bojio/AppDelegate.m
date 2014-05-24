@@ -32,6 +32,19 @@
 
 
 
+-(NSString *)formatDate : (NSDate *)date {
+  NSString *dateStr = @"";
+  
+  NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+  [dateFormatter setLocale:[NSLocale localeWithLocaleIdentifier:@"en_US"]];
+  [dateFormatter setDateFormat:@"dd-MMM-YYYY hh:mm:ss a"];
+  //  [dateFormatter setDateFormat:@"YYYY-MM-dd HH:mm:ss"];
+  dateStr = [dateFormatter stringFromDate:date];
+  
+  NSLog(@"DateStr : %@", dateStr);
+  return  dateStr;
+}
+
 
 
 - (void)applicationWillResignActive:(UIApplication *)application

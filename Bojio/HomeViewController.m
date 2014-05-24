@@ -175,12 +175,13 @@
 	cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:identifier];
   }
   
+  AppDelegate *delegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
   
   PFObject *object		= [eventsList objectAtIndex:indexPath.row];
   
   NSString *eventName	= [object objectForKey:@"title"];
   NSString *eventPlace	= [[object objectForKey:@"location_info"] objectForKey:@"Name"];
-  NSString *eventTime	= [self formatDate: [object objectForKey:@"eventDate"]];
+  NSString *eventTime	= [delegate formatDate: [object objectForKey:@"eventDate"]];
   NSString *eventDesc	= [object objectForKey:@"summary"];
   NSString *eventType	= [self getUserEventTypes: [object objectForKey:@"eventTypes"]];
   
@@ -239,12 +240,12 @@
 	for(int i=0; i < [eventTypes count]; i ++) {
 	  
 	  NSString *eventTypeId = [eventTypes objectAtIndex:i];
-	  NSLog(@"eventTypeId : %@", eventTypeId);
+	  //NSLog(@"eventTypeId : %@", eventTypeId);
 
 	  for(int j=0; j < delegate.userInterests.count; j++) {
 		
 		PFObject *object = delegate.userInterests[j];
-		NSLog(@"object.objectId : %@", object.objectId);
+		//NSLog(@"object.objectId : %@", object.objectId);
 
 		
 		if ([object.objectId isEqualToString:eventTypeId]) {

@@ -14,5 +14,11 @@
 }
 
 @property (nonatomic, strong) PFObject *object;
+@property (weak, nonatomic) IBOutlet UILabel *eventNameLbl;
+@property (weak, nonatomic) IBOutlet UILabel *eventPlaceLbl;
+@property (weak, nonatomic) IBOutlet UILabel *eventDateTime;
+@property (weak, nonatomic) IBOutlet UILabel *eventDescLbl;
+@property (weak, nonatomic) IBOutlet UILabel *eventTypeLbl;
 
+@property (weak, nonatomic) IBOutlet UIButton *yesBtn;
 @end
