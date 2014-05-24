@@ -232,6 +232,9 @@
 -(NSString *)getUserEventTypes : (NSArray *)eventTypes {
   NSString *interest = @"";
   
+  if(!eventTypes) {
+	return interest;
+  }
   
   for(int j=0; j < eventTypes.count; j++) {
 	
@@ -241,8 +244,10 @@
 
   
   NSMutableArray *components = (NSMutableArray *)[interest componentsSeparatedByString:@","];
-  [components removeLastObject];
-  interest = [components componentsJoinedByString:@","];
+  if(components) {
+	[components removeLastObject];
+	interest = [components componentsJoinedByString:@","];
+  }
   NSLog(@"interest : %@", interest);
   
 

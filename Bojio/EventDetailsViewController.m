@@ -146,18 +146,48 @@
   
   BOOL attendance	= [[object objectForKey:@"attendance"] boolValue];
   
-  NSLog(@"Attendance : %d", attendance);
-  
   UIImageView *imageView  = (UIImageView *)[cell.contentView viewWithTag:1];
   UILabel *userNameLbl	  = (UILabel *)[cell.contentView viewWithTag:2];
 
-  //imageView.image		  = @"";
 //  userNameLbl.text		  = eventType;
   if(attendance) {
 	imageView.image = [UIImage imageNamed:@"green.png"];
   } else {
 	imageView.image = [UIImage imageNamed:@"red.png"];
   }
+  
+  
+//  //----------- Get user names from userId ------------------
+//  
+  NSLog(@"object 2323 : %@", [object objectForKey:@"userId"]);
+  NSLog(@"object 2222 : %@", [[object objectForKey:@"userId"] objectId]);
+
+
+//  PFUser *userObj = (PFUser *)[object objectForKey:@"userId"];
+//  NSLog(@"Username : %@", [userObj objectForKey:@"username"]);
+//  
+//  
+//  
+//  
+//  PFQuery *query = [PFQuery queryWithClassName:@"User"];
+//  //[query whereKey:@"objectId" equalTo:[object objectForKey:@"userId"]];
+//  
+//  
+//  [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
+//	if (!error) {
+//	  // The find succeeded.
+//	  NSLog(@"----Successfully retrieved %d Users Names-------", objects.count);
+//	  
+//	  //usersAttending = objects;
+//	  NSLog(@"users 123 : %@", objects);
+//	  //[self.aTableView reloadData];
+//	  
+//	} else {
+//	  // Log details of the failure
+//	  NSLog(@"User's name Error: %@ %@", error, [error userInfo]);
+//	}
+//  }];
+  
   
   
   return cell;
