@@ -46,4 +46,8 @@
 }
 */
 
+- (IBAction)logoutAction:(id)sender {
+    [PFUser logOut];
+}
+
 @end

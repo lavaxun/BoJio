@@ -8,7 +8,7 @@
 
 #import "LoginViewController.h"
 
-@interface LoginViewController ()
+@interface LoginViewController () <PFLogInViewControllerDelegate>
 
 @end
 
@@ -27,6 +27,19 @@
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    
+    if ([PFUser currentUser] && // Check if a user is cached
+        [PFFacebookUtils isLinkedWithUser:[PFUser currentUser]]) // Check if user is linked to Facebook
+    {
+        // Push the next view controller without animation
+        [self performSegueWithIdentifier:@"after_login" sender:self];
+    }
+}
+
+-(void)viewDidAppear:(BOOL)animated
+{
+    [super viewDidAppear:animated];
+    
 }
 
 - (void)didReceiveMemoryWarning
@@ -34,6 +47,25 @@
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
+
+
+#pragma mark - PFLogInViewControllerDelegate
+
+// Sent to the delegate when a PFUser is logged in.
+- (void)logInViewController:(PFLogInViewController *)logInController didLogInUser:(PFUser *)user {
+    [self dismissViewControllerAnimated:YES completion:NULL];
+}
+
+// Sent to the delegate when the log in attempt fails.
+- (void)logInViewController:(PFLogInViewController *)logInController didFailToLogInWithError:(NSError *)error {
+    NSLog(@"Failed to log in...");
+}
+
+// Sent to the delegate when the log in screen is dismissed.
+- (void)logInViewControllerDidCancelLogIn:(PFLogInViewController *)logInController {
+    NSLog(@"User dismissed the logInViewController");
+}
+
 
 /*
 #pragma mark - Navigation
@@ -45,5 +77,33 @@
     // Pass the selected object to the new view controller.
 }
 */
+
+- (IBAction)loginAction:(id)sender {
+    
+    self.activityIndicator.hidden = NO;
+    
+    // The permissions requested from the user
+    NSArray *permissionsArray = @[ @"user_about_me", @"user_relationships", @"user_birthday", @"user_location"];
+    
+    // Login PFUser using Facebook
+    [PFFacebookUtils logInWithPermissions:permissionsArray block:^(PFUser *user, NSError *error) {
+        [self.activityIndicator stopAnimating]; // Hide loading indicator
+        
+        if (!user) {
+            if (!error) {
+                NSLog(@"Uh oh. The user cancelled the Facebook login.");
+            } else {
+                NSLog(@"Uh oh. An error occurred: %@", error);
+            }
+        } else if (user.isNew) {
+            NSLog(@"User with facebook signed up and logged in!");
+            [self performSegueWithIdentifier:@"after_login" sender:self];
+        } else {
+            NSLog(@"User with facebook logged in!");
+            [self performSegueWithIdentifier:@"after_login" sender:self];
+        }
+    }];
+}
+
 
 @end

@@ -27,6 +27,26 @@
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    
+    [self.navigationItem setHidesBackButton:YES animated:YES];
+
+    // Create request for user's Facebook data
+    FBRequest *request = [FBRequest requestForMe];
+    
+    // Send request to Facebook
+    [request startWithCompletionHandler:^(FBRequestConnection *connection, id result, NSError *error) {
+        // handle response
+        if(!error){
+            NSLog(@"requested from fb");
+        }else if ([error.userInfo[FBErrorParsedJSONResponseKey][@"body"][@"error"][@"type"] isEqualToString:@"OAuthException"]){
+            NSLog(@"Invalid oauth");
+            [self logoutAction];
+        }else{
+            NSLog(@"has error");
+        }
+    }];
+    
+    
 }
 
 - (void)didReceiveMemoryWarning
@@ -36,6 +56,10 @@
 }
 
 
+-(void)logoutAction
+{
+    [PFUser logOut];
+}
 
 #pragma mark -
 
@@ -94,4 +118,6 @@
 }
 */
 
+- (IBAction)profileOnTap:(id)sender {
+}
 @end
