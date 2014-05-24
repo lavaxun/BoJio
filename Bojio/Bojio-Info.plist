@@ -30,6 +30,10 @@
 	<array>
 		<string>armv7</string>
 	</array>
+	<key>FacebookAppID</key>
+	<string>284315155080351</string>
+	<key>FacebookDisplayName</key>
+	<string>Boh Jio</string>
 	<key>UISupportedInterfaceOrientations</key>
 	<array>
 		<string>UIInterfaceOrientationPortrait</string>
