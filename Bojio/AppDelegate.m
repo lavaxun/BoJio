@@ -17,44 +17,20 @@
     // [[PFUser currentUser] objectId]
 
     [Parse setApplicationId:@"Yi325bn8AIUm3a6BkE02BAzfOvjjVZCgdishElTt" clientKey:@"eSIvsSwDlEi2h9yawgZYeocCOeyCq545oWy5Azfl"];
-    
+  
+
+  
     [PFFacebookUtils initializeFacebook];
     
     // fb app id 284315155080351
     // Override point for customization after application launch.
   //Sample Test
   
-	
   
     return YES;
 }
 
 
-
--(void)loadUserInterests {
-  
-  //------------------ Load the Users --------------------------
-  PFQuery *query = [PFQuery queryWithClassName:@"Store_interest"];
-  
-  [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
-	if (!error) {
-	  // The find succeeded.
-	  NSLog(@"Successfully retrieved %d interests.", objects.count);
-	  // Do something with the found objects
-	  
-	  
-	  AppDelegate *delegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
-	  delegate.userInterests = [NSMutableArray arrayWithArray: objects];
-	  
-	  NSLog(@"userInterests : %@", delegate.userInterests);
-	  
-	  
-	} else {
-	  // Log details of the failure
-	  NSLog(@"UserInterests Error: %@ %@", error, [error userInfo]);
-	}
-  }];
-}
 
 
 

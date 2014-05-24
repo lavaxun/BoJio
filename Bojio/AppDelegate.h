@@ -13,6 +13,5 @@
 @property (strong, nonatomic) UIWindow *window;
 @property (nonatomic, strong) NSMutableArray *userInterests;
 
--(void)loadUserInterests;
 
 @end

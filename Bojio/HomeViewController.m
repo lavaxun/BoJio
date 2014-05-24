@@ -60,14 +60,40 @@
 										   selector:@selector(refreshTable:)
 											   name:@"refreshTable"
 											 object:nil];
-  [[NSNotificationCenter defaultCenter] postNotificationName:@"refreshTable" object:self];
+  //[[NSNotificationCenter defaultCenter] postNotificationName:@"refreshTable" object:self];
 
+  [self loadUserInterests];
 }
 
 
 
 #pragma mark - Events list
 
+
+-(void)loadUserInterests {
+  
+  //------------------ Load the Users --------------------------
+  PFQuery *query = [PFQuery queryWithClassName:@"Store_interest"];
+  
+  [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
+	if (!error) {
+	  // The find succeeded.
+	  NSLog(@"Successfully retrieved %d interests.", objects.count);
+	  // Do something with the found objects
+	  
+	  
+	  AppDelegate *delegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
+	  delegate.userInterests = [NSMutableArray arrayWithArray: objects];
+	  
+	  NSLog(@"userInterests : %@", delegate.userInterests);
+	  [[NSNotificationCenter defaultCenter] postNotificationName:@"refreshTable" object:self];
+	  
+	} else {
+	  // Log details of the failure
+	  NSLog(@"UserInterests Error: %@ %@", error, [error userInfo]);
+	}
+  }];
+}
 
 
 
@@ -85,11 +111,11 @@
 	  // The find succeeded.
 	  NSLog(@"Successfully retrieved %d events.", objects.count);
 	  
-	  // Do something with the found objects
-	  for (PFObject *object in objects) {
-        NSLog(@"Event : %@", object.objectId);
-		NSLog(@"Event 22 : %@", [object objectForKey:@"eventDate"]);
-	  }
+//	  // Do something with the found objects
+//	  for (PFObject *object in objects) {
+//        NSLog(@"Event : %@", object.objectId);
+//		NSLog(@"Event 22 : %@", [object objectForKey:@"eventDate"]);
+//	  }
 	  
 	  eventsList = objects;
 	  NSLog(@"EventsList : %@", eventsList);
@@ -149,13 +175,17 @@
   }
   
   
-  PFObject *object = [eventsList objectAtIndex:indexPath.row];
+  PFObject *object		= [eventsList objectAtIndex:indexPath.row];
+  
+  
+  NSLog(@"EventDate : %@", [object objectForKey:@"eventDate"]);
+  
   
   NSString *eventName	= [object objectForKey:@"title"];
   NSString *eventPlace	= [[object objectForKey:@"location_info"] objectForKey:@"Name"];
-  NSString *eventTime	= @"";
+  NSString *eventTime	= [self formatDate: [object objectForKey:@"eventDate"]];
   NSString *eventDesc	= [object objectForKey:@"summary"];
-  NSString *eventType	= @""; //[self getUserEventTypes: [object objectForKey:@"eventTypes"]];
+  NSString *eventType	= [self getUserEventTypes: [object objectForKey:@"eventTypes"]];
   
   
   UILabel *eventNameLbl	  = (UILabel *)[cell.contentView viewWithTag:1];
@@ -175,6 +205,61 @@
 }
 
 
+#pragma mark - User Interests 
+
+
+-(NSString *)formatDate : (NSDate *)date {
+  NSString *dateStr = @"";
+  
+  NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+  [dateFormatter setLocale:[NSLocale localeWithLocaleIdentifier:@"en_US"]];
+  [dateFormatter setDateFormat:@"dd-MMM-YYYY hh:mm:ss a"];
+  //  [dateFormatter setDateFormat:@"YYYY-MM-dd HH:mm:ss"];
+  dateStr = [dateFormatter stringFromDate:date];
+  
+  NSLog(@"DateStr : %@", dateStr);
+  return  dateStr;
+}
+
+
+
+-(NSString *)getUserEventTypes : (id)eventTypes {
+  NSString *interest = @"";
+  
+  AppDelegate *delegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
+  
+  if([eventTypes isKindOfClass:[NSArray class]]) {
+	
+	for(int i=0; i < [eventTypes count]; i ++) {
+	  
+	  NSString *eventTypeId = [eventTypes objectAtIndex:i];
+	  NSLog(@"eventTypeId : %@", eventTypeId);
+
+	  for(int j=0; j < delegate.userInterests.count; j++) {
+		
+		PFObject *object = delegate.userInterests[j];
+		NSLog(@"object.objectId : %@", object.objectId);
+
+		
+		if ([object.objectId isEqualToString:eventTypeId]) {
+		  interest = [NSString stringWithFormat:@"%@%@%@", interest, (interest.length)?@", ":@"", [object objectForKey:@"title"]];
+		}
+	  }
+	}
+	
+  } else if([eventTypes isKindOfClass:[NSString class]]) {
+	;
+  }
+  
+  NSLog(@"interest : %@", interest);
+  
+  if([interest length]) {
+	
+  }
+  
+  return interest;
+  
+}
 
 
 
