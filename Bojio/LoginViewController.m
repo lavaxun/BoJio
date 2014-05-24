@@ -32,51 +32,12 @@
     if ([PFUser currentUser] && // Check if a user is cached
         [PFFacebookUtils isLinkedWithUser:[PFUser currentUser]]) // Check if user is linked to Facebook
     {
-	  
-	  
-	  
-	  //------------------ Load the User Interests --------------------------
-	  AppDelegate *delegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
-	  [delegate loadUserInterests];
-	  
-	  
-	  
-	  //------------------ Load the Users --------------------------
-	  PFQuery *query = [PFQuery queryWithClassName:@"User"];
-	  [query whereKey:@"username" equalTo:[PFUser currentUser].username];
-	  
-	  [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
-		if (!error) {
-		  // The find succeeded.
-		  NSLog(@"Successfully retrieved %d users.", objects.count);
-		  // Do something with the found objects
-		  
-		  if (objects.count) {
-			
-			PFObject *object = [objects objectAtIndex:0];
-			delegate.objectIdForLoggedInUser = object.objectId;
-			
-			NSLog(@"UserObjectId : %@", object.objectId);
-			
-		  }
-		  
-		  
-		  
-		} else {
-		  // Log details of the failure
-		  NSLog(@"Error: %@ %@", error, [error userInfo]);
-		}
-	  }];
-	  
-	  
+	  	  
         [self performSegueWithIdentifier:@"after_login" sender:self];
 	  
     }else{
 	  
-	  
-	  
-	  // Push the next view controller without animation
-	  //[self performSegueWithIdentifier:@"after_login" sender:self];
+	  ;
 	  
     }
 }
@@ -159,7 +120,7 @@
                             NSMutableArray* friendList = [[NSMutableArray alloc] initWithCapacity:[friends count]];
                             
                             for (NSDictionary<FBGraphUser>* friend in friends) {
-                                [friendList addObject:[friend objectID]];
+                                [friendList addObject:friend.id];
                             }
                             
                             PFObject *userRelationObject = [PFObject objectWithClassName:@"User_relations"];

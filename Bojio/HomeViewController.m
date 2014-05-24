@@ -7,6 +7,7 @@
 //
 
 #import "HomeViewController.h"
+#import "AppDelegate.h"
 
 @interface HomeViewController () {
   NSArray *eventsList;
@@ -32,7 +33,7 @@
   
   
   NSString *currentUser = [PFUser currentUser].username;
-  NSLog(@"Current USer : %@", currentUser);
+  NSLog(@"Current User : %@", currentUser);
   
   
     
@@ -77,11 +78,13 @@
   
   // Reload the recipes
   PFQuery *query = [PFQuery queryWithClassName:@"User_events"];
-  //[query whereKey:@"parent" equalTo:@"Dan Stemkoski"];
+  [query whereKey:@"parent" equalTo:[PFUser currentUser]];
+  
   [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
 	if (!error) {
 	  // The find succeeded.
 	  NSLog(@"Successfully retrieved %d events.", objects.count);
+	  
 	  // Do something with the found objects
 	  for (PFObject *object in objects) {
         NSLog(@"Event : %@", object.objectId);
