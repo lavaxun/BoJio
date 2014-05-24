@@ -23,6 +23,8 @@
 		5A1C89341930770B0078ADA4 /* CreateEventViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A1C89331930770B0078ADA4 /* CreateEventViewController.m */; };
 		5A1C89371930771D0078ADA4 /* EventDetailsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A1C89361930771D0078ADA4 /* EventDetailsViewController.m */; };
 		5A1C893A193077340078ADA4 /* ProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A1C8939193077340078ADA4 /* ProfileViewController.m */; };
+		5A4144501931121F007C0608 /* green.png in Resources */ = {isa = PBXBuildFile; fileRef = 5A41444E1931121F007C0608 /* green.png */; };
+		5A4144511931121F007C0608 /* red.png in Resources */ = {isa = PBXBuildFile; fileRef = 5A41444F1931121F007C0608 /* red.png */; };
 		A189A36919307A2A006DF3FE /* Parse.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A189A36819307A2A006DF3FE /* Parse.framework */; };
 		A189A37B19307B29006DF3FE /* AdSupport.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A189A36A19307B29006DF3FE /* AdSupport.framework */; };
 		A189A37D19307B29006DF3FE /* Accounts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A189A36C19307B29006DF3FE /* Accounts.framework */; };
@@ -163,6 +165,7 @@
 		5A1C88EB193074100078ADA4 = {
 			isa = PBXGroup;
 			children = (
+				5A41444D1931121F007C0608 /* images */,
 				5A1C88FD193074110078ADA4 /* Bojio */,
 				5A1C891C193074110078ADA4 /* BojioTests */,
 				5A1C88F6193074100078ADA4 /* Frameworks */,
@@ -267,6 +270,15 @@
 				5A1C891F193074110078ADA4 /* InfoPlist.strings */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		5A41444D1931121F007C0608 /* images */ = {
+			isa = PBXGroup;
+			children = (
+				5A41444E1931121F007C0608 /* green.png */,
+				5A41444F1931121F007C0608 /* red.png */,
+			);
+			path = images;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */

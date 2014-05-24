@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 #import <Parse/Parse.h>
 
-@interface EventDetailsViewController : UIViewController {
+@interface EventDetailsViewController : UIViewController <UITableViewDataSource, UITableViewDelegate> {
   
 }
 
@@ -21,4 +21,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *eventTypeLbl;
 
 @property (weak, nonatomic) IBOutlet UIButton *yesBtn;
+
+@property (weak, nonatomic) IBOutlet UITableView *aTableView;
+
 @end

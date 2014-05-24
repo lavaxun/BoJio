@@ -97,7 +97,6 @@
 - (void)refreshTable:(NSNotification *) notification
 {
   
-  NSLog(@"Getting user events");
   
     PFQuery *relationQuery = [PFQuery queryWithClassName:@"User_relations"];
     [relationQuery whereKey:@"parent" equalTo:[PFUser currentUser]];
@@ -160,7 +159,7 @@
   [[NSNotificationCenter defaultCenter] removeObserver:self name:@"refreshTable" object:nil];
 }
 
-#pragma mark -
+#pragma mark - TableView
 
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
@@ -252,39 +251,28 @@
 
 
 
--(NSString *)getUserEventTypes : (id)eventTypes {
+-(NSString *)getUserEventTypes : (NSArray *)eventTypes {
   NSString *interest = @"";
   
-  AppDelegate *delegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
-  
-  if([eventTypes isKindOfClass:[NSArray class]]) {
-	
-	for(int i=0; i < [eventTypes count]; i ++) {
-	  
-	  NSString *eventTypeId = [eventTypes objectAtIndex:i];
-	  //NSLog(@"eventTypeId : %@", eventTypeId);
-
-	  for(int j=0; j < delegate.userInterests.count; j++) {
-		
-		PFObject *object = delegate.userInterests[j];
-		//NSLog(@"object.objectId : %@", object.objectId);
-
-		
-		if ([object.objectId isEqualToString:eventTypeId]) {
-		  interest = [NSString stringWithFormat:@"%@%@%@", interest, (interest.length)?@", ":@"", [object objectForKey:@"title"]];
-		}
-	  }
-	}
-	
-  } else if([eventTypes isKindOfClass:[NSString class]]) {
-	;
+  if(!eventTypes) {
+	return interest;
   }
   
+  for(int j=0; j < eventTypes.count; j++) {
+	
+	  interest = eventTypes[j];
+	  interest = [NSString stringWithFormat:@"%@,", interest];
+  }
+
+  
+  NSMutableArray *components = (NSMutableArray *)[interest componentsSeparatedByString:@","];
+  if(components) {
+	[components removeLastObject];
+	interest = [components componentsJoinedByString:@","];
+  }
   NSLog(@"interest : %@", interest);
   
-  if([interest length]) {
-	
-  }
+
   
   return interest;
   
