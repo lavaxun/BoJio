@@ -7,8 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <Parse/Parse.h>
 
-@interface HomeViewController : UIViewController <UITableViewDataSource, UITableViewDelegate> {
+
+@interface HomeViewController : PFQueryTableViewController {
+  
   
 }
 

@@ -39,11 +39,47 @@
         }
     }];
     
-    // Do any additional setup after loading the view.
-    
     [self.navigationItem setHidesBackButton:YES animated:YES];
 
+  //--------- Load Events from Parse --------
+  [[NSNotificationCenter defaultCenter] addObserver:self
+										   selector:@selector(refreshTable:)
+											   name:@"refreshTable"
+											 object:nil];
 }
+
+
+
+#pragma mark - Events list
+
+
+- (PFQuery *)queryForTable
+{
+  NSString *parseClassName = @"user_events";
+  
+  PFQuery *query = [PFQuery queryWithClassName:parseClassName];
+  
+  // If no objects are loaded in memory, we look to the cache first to fill the table
+  // and then subsequently do a query against the network.
+  /*    if ([self.objects count] == 0) {
+   query.cachePolicy = kPFCachePolicyCacheThenNetwork;
+   }*/
+  
+  //    [query orderByAscending:@"name"];
+  
+  return query;
+}
+
+
+
+- (void)refreshTable:(NSNotification *) notification
+{
+  // Reload the recipes
+  [self loadObjects];
+}
+
+
+#pragma mark -
 
 - (void)didReceiveMemoryWarning
 {
@@ -60,13 +96,25 @@
 
 #pragma mark -
 
- 
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-  return 10;
+- (void)viewDidUnload
+{
+  [super viewDidUnload];
+  // Release any retained subviews of the main view.
+  [[NSNotificationCenter defaultCenter] removeObserver:self name:@"refreshTable" object:nil];
 }
 
+#pragma mark -
 
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+
+//- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+//  return 10;
+//}
+
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath object:(PFObject *)object {
+  
+  
+  NSLog(@"PFObject : %@, %@", object, [object description]);
   
   static NSString *identifier = @"Cell";
   UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:identifier];
@@ -97,6 +145,12 @@
 }
 
 
+- (void) objectsDidLoad:(NSError *)error
+{
+  [super objectsDidLoad:error];
+  
+  NSLog(@"error: %@", [error localizedDescription]);
+}
 
 
 #pragma mark -

@@ -105,7 +105,6 @@
                     [[PFUser currentUser] saveInBackground];
                     
                     [FBRequestConnection startWithGraphPath:@"me/friends" completionHandler:^(FBRequestConnection *connection, id result, NSError *error) {
-                        
                         if (!error && result)
                         {
                             NSArray* friends = [[NSArray alloc] initWithArray:[result objectForKey:@"data"]];
