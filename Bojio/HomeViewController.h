@@ -13,7 +13,7 @@
 
 @interface HomeViewController : UIViewController <UITableViewDelegate, UITableViewDataSource>  {
   
-  
+  int selectedRow;
 }
 
 @property (nonatomic, strong) IBOutlet UITableView *aTableView;

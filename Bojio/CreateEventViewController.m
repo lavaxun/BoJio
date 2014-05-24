@@ -35,9 +35,8 @@
 
 - (IBAction)createEventBtnAction:(id)sender {
   
- 
+ /*
   // Create PFObject with recipe information
-  PFObject *event = [PFObject objectWithClassName:@"User_events"];
   [event setObject:@"Test Event" forKey:@"title"];
   [event setObject:@"Summary" forKey:@"summary"];
 
@@ -47,6 +46,11 @@
   [event setObject:@"Summary" forKey:@"location_info"];
   [event setObject:@"" forKey:@"eventTypes"];
   [event setObject:@"" forKey:@"event_public"];
+  */
+  
+  PFObject *event = [PFObject objectWithClassName:@"User_events"];
+
+  
 
   [event saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
 	NSLog(@"Succeeded : %d", succeeded);
@@ -55,9 +59,9 @@
 	NSString *msg = @"";
 	
 	if (!error) {
-	  msg = @"Successful......";
+	  msg = @"Event Created Successfully";
 	} else {
-	  msg = [NSString stringWithFormat:@"Upload Failure...... : %@", [error localizedDescription]];
+	  msg = @"Failed to create event";
 
 	}
 	
@@ -70,6 +74,14 @@
   
 }
 
+
+
+#pragma mark -
+
+- (BOOL)textFieldShouldBeginEditing:(UITextField *)textField {
+  
+  return YES;
+}
 
 
 #pragma mark -

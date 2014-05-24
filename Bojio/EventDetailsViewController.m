@@ -27,7 +27,24 @@
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+  [self displayEventDetails];
 }
+
+
+#pragma mark -
+
+-(void)displayEventDetails {
+  if(self.object){
+	
+	
+	
+  } else {
+	NSLog(@"Object is empty");
+  }
+}
+
+#pragma mark -
+
 
 - (void)didReceiveMemoryWarning
 {

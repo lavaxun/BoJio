@@ -8,6 +8,7 @@
 
 #import "HomeViewController.h"
 #import "AppDelegate.h"
+#import "EventDetailsViewController.h"
 
 @interface HomeViewController () {
   NSArray *eventsList;
@@ -177,10 +178,6 @@
   
   PFObject *object		= [eventsList objectAtIndex:indexPath.row];
   
-  
-  NSLog(@"EventDate : %@", [object objectForKey:@"eventDate"]);
-  
-  
   NSString *eventName	= [object objectForKey:@"title"];
   NSString *eventPlace	= [[object objectForKey:@"location_info"] objectForKey:@"Name"];
   NSString *eventTime	= [self formatDate: [object objectForKey:@"eventDate"]];
@@ -205,7 +202,16 @@
 }
 
 
-#pragma mark - User Interests 
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+ 
+  selectedRow = indexPath.row;
+  [self performSegueWithIdentifier:@"EventDetailSegue" sender:self];
+
+}
+
+
+
+#pragma mark - User Interests
 
 
 -(NSString *)formatDate : (NSDate *)date {
@@ -258,6 +264,26 @@
   }
   
   return interest;
+  
+}
+
+
+
+#pragma mark -
+
+
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
+  // Get the new view controller using [segue destinationViewController].
+  // Pass the selected object to the new view controller.
+  
+  
+  if([[segue identifier] isEqualToString:@"EventDetailSegue"]) {
+	
+	EventDetailsViewController *controller = [segue destinationViewController];
+	controller.object = [eventsList objectAtIndex:selectedRow];
+	
+  }
   
 }
 
