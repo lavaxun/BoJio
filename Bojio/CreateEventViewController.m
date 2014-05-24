@@ -207,13 +207,12 @@
 #pragma mark -
 
 -(void)showDateTimePickerView {
-  self.actionSheet = [[UIActionSheet alloc] initWithTitle:@"" delegate:nil cancelButtonTitle:nil destructiveButtonTitle:@" " otherButtonTitles:@" ", @" ",nil];
+  self.actionSheet = [[UIActionSheet alloc] initWithTitle:@"" delegate:nil cancelButtonTitle:nil destructiveButtonTitle:@" " otherButtonTitles:@" ", @" ", @" ",@" ",nil];
   
   
-//  self.actionSheet = [[UIActionSheet alloc] initWithFrame:CGRectMake(0, 20, 300, 300)];
-  self.actionSheet.frame = CGRectMake(0, 0, 400, 300);
+  self.actionSheet.frame = CGRectMake(0, 0, 400, 500);
   
-  self.actionSheet.actionSheetStyle = UIActionSheetStyleBlackTranslucent;
+  self.actionSheet.actionSheetStyle = UIActionSheetStyleAutomatic;
   
   
   UIDatePicker *datePicker=[[UIDatePicker alloc]init];//Date picker
