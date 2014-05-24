@@ -107,4 +107,6 @@
 }
 */
 
+- (IBAction)profileOnTap:(id)sender {
+}
 @end

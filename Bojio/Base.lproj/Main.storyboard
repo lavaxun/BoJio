@@ -140,23 +140,27 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
                     <navigationItem key="navigationItem" id="aCW-GR-J7t">
-                        <barButtonItem key="leftBarButtonItem" title="Profile" id="gMl-Uh-d1p"/>
-                        <barButtonItem key="rightBarButtonItem" title="Create Event" id="U0J-FU-hP3"/>
+                        <barButtonItem key="leftBarButtonItem" title="Profile" id="gMl-Uh-d1p">
+                            <connections>
+                                <segue destination="oXa-pk-45r" kind="push" id="QAX-Fi-jCk"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" title="Create Event" id="U0J-FU-hP3">
+                            <connections>
+                                <segue destination="x19-Hb-IYf" kind="push" id="mCo-M0-aUh"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics"/>
-                    <connections>
-                        <segue destination="x19-Hb-IYf" kind="push" id="372-Pv-HAD"/>
-                        <segue destination="oXa-pk-45r" kind="push" id="wSM-Xp-Gdg"/>
-                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="wRO-dA-CSN" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="633" y="-38"/>
         </scene>
-        <!--View Controller - Profile-->
+        <!--Profile View Controller - Profile-->
         <scene sceneID="uOf-bD-vZ2">
             <objects>
-                <viewController id="oXa-pk-45r" sceneMemberID="viewController">
+                <viewController id="oXa-pk-45r" customClass="ProfileViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="38p-4T-QR5"/>
                         <viewControllerLayoutGuide type="bottom" id="NV2-mN-cT4"/>
@@ -166,7 +170,13 @@
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
-                    <navigationItem key="navigationItem" title="Profile" id="43z-Z8-8GW"/>
+                    <navigationItem key="navigationItem" title="Profile" id="43z-Z8-8GW">
+                        <barButtonItem key="rightBarButtonItem" title="Logout" id="6uc-oH-4Oj">
+                            <connections>
+                                <action selector="logoutAction:" destination="oXa-pk-45r" id="JO3-gq-VIn"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="wa9-tB-SCr" userLabel="First Responder" sceneMemberID="firstResponder"/>

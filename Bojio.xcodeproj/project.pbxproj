@@ -196,9 +196,9 @@
 		5A1C88FD193074110078ADA4 /* Bojio */ = {
 			isa = PBXGroup;
 			children = (
+				5A1C8909193074110078ADA4 /* Main.storyboard */,
 				5A1C8906193074110078ADA4 /* AppDelegate.h */,
 				5A1C8907193074110078ADA4 /* AppDelegate.m */,
-				5A1C8909193074110078ADA4 /* Main.storyboard */,
 				5A1C890C193074110078ADA4 /* ViewController.h */,
 				5A1C890D193074110078ADA4 /* ViewController.m */,
 				5A1C892C193076EE0078ADA4 /* LoginViewController.h */,
