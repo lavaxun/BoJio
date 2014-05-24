@@ -53,12 +53,23 @@
 	cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:identifier];
   }
   
-  NSString *eventName = @"";
-  NSString *eventPlace = @"";
-  NSString *eventTime = @"";
-  NSString *eventDesc = @"";
-  NSString *eventType = @"";
+  NSString *eventName	= [NSString stringWithFormat:@"Test Event : %d", indexPath.row];
+  NSString *eventPlace	= [NSString stringWithFormat:@"Place : %d", indexPath.row];
+  NSString *eventTime	= @"";
+  NSString *eventDesc	= @"";
+  NSString *eventType	= @"";
   
+  UILabel *eventNameLbl	  = (UILabel *)[cell.contentView viewWithTag:1];
+  UILabel *eventPlaceLbl  = (UILabel *)[cell.contentView viewWithTag:2];
+  UILabel *eventTimeLbl	  = (UILabel *)[cell.contentView viewWithTag:3];
+  UILabel *eventDescLbl	  = (UILabel *)[cell.contentView viewWithTag:4];
+  UILabel *eventTypeLbl	  = (UILabel *)[cell.contentView viewWithTag:5];
+  
+  eventNameLbl.text		  = eventName;
+  eventPlaceLbl.text	  = eventPlace;
+  eventTimeLbl.text		  = eventTime;
+  eventDescLbl.text		  = eventDesc;
+  eventTypeLbl.text		  = eventType;
   
   
   return cell;
