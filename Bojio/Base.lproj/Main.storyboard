@@ -62,7 +62,7 @@
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="Cell" rowHeight="136" id="47X-SR-5Xl">
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="Cell" rowHeight="136" id="47X-SR-5Xl">
                                         <rect key="frame" x="0.0" y="86" width="320" height="136"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="47X-SR-5Xl" id="fTR-QM-V68">
@@ -133,8 +133,8 @@
                                     </tableViewCell>
                                 </prototypes>
                                 <connections>
-                                    <outlet property="dataSource" destination="11N-2e-dpr" id="FTx-JS-wTd"/>
-                                    <outlet property="delegate" destination="11N-2e-dpr" id="Kte-e4-qja"/>
+                                    <outlet property="dataSource" destination="11N-2e-dpr" id="ben-kA-bQH"/>
+                                    <outlet property="delegate" destination="11N-2e-dpr" id="edK-qW-Qzt"/>
                                 </connections>
                             </tableView>
                         </subviews>
@@ -154,12 +154,13 @@
                     </navigationItem>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics"/>
                     <connections>
+                        <outlet property="aTableView" destination="5oo-Nt-aJR" id="44x-by-jqb"/>
                         <segue destination="x19-Hb-IYf" kind="push" identifier="EventDetailSegue" id="372-Pv-HAD"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="wRO-dA-CSN" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="633" y="-38"/>
+            <point key="canvasLocation" x="767" y="-63"/>
         </scene>
         <!--Create Event View Controller - Create Event-->
         <scene sceneID="YUs-kN-lkO">

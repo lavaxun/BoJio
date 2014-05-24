@@ -8,7 +8,9 @@
 
 #import "HomeViewController.h"
 
-@interface HomeViewController ()
+@interface HomeViewController () {
+  NSArray *eventsList;
+}
 
 @end
 
@@ -27,6 +29,12 @@
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+  
+  
+  NSString *currentUser = [PFUser currentUser].username;
+  NSLog(@"Current USer : %@", currentUser);
+  
+  
     
     [self.navigationItem setHidesBackButton:YES animated:YES];
 
@@ -52,6 +60,8 @@
 										   selector:@selector(refreshTable:)
 											   name:@"refreshTable"
 											 object:nil];
+  [[NSNotificationCenter defaultCenter] postNotificationName:@"refreshTable" object:self];
+
 }
 
 
@@ -59,29 +69,35 @@
 #pragma mark - Events list
 
 
-- (PFQuery *)queryForTable
-{
-  NSString *parseClassName = @"user_events";
-  
-  PFQuery *query = [PFQuery queryWithClassName:parseClassName];
-  
-  // If no objects are loaded in memory, we look to the cache first to fill the table
-  // and then subsequently do a query against the network.
-  /*    if ([self.objects count] == 0) {
-   query.cachePolicy = kPFCachePolicyCacheThenNetwork;
-   }*/
-  
-  //    [query orderByAscending:@"name"];
-  
-  return query;
-}
-
 
 
 - (void)refreshTable:(NSNotification *) notification
 {
+  
+  NSLog(@"Getting user events");
+  
   // Reload the recipes
-  [self loadObjects];
+  PFQuery *query = [PFQuery queryWithClassName:@"User_events"];
+  //[query whereKey:@"parent" equalTo:@"Dan Stemkoski"];
+  [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
+	if (!error) {
+	  // The find succeeded.
+	  NSLog(@"Successfully retrieved %d events.", objects.count);
+	  // Do something with the found objects
+	  for (PFObject *object in objects) {
+        NSLog(@"Event : %@", object.objectId);
+	  }
+	  
+	  eventsList = objects;
+	  NSLog(@"EventsList : %@", eventsList);
+	  [self.aTableView reloadData];
+	  
+	} else {
+	  // Log details of the failure
+	  NSLog(@"Error: %@ %@", error, [error userInfo]);
+	}
+  }];
+  
 }
 
 
@@ -97,7 +113,10 @@
 -(void)logoutAction
 {
     [PFUser logOut];
+	[self.navigationController popToRootViewControllerAnimated:YES];
 }
+
+
 
 #pragma mark -
 
@@ -111,21 +130,23 @@
 #pragma mark -
 
 
-//- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-//  return 10;
-//}
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+  
+  NSLog(@"EventsList Count : %d", eventsList.count);
+  return [eventsList count];
+}
 
 
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath object:(PFObject *)object {
-  
-  
-  NSLog(@"PFObject : %@, %@", object, [object description]);
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
   
   static NSString *identifier = @"Cell";
   UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:identifier];
   if(cell == nil) {
 	cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:identifier];
   }
+  
+  
+  
   
   NSString *eventName	= [NSString stringWithFormat:@"Test Event : %d", indexPath.row];
   NSString *eventPlace	= [NSString stringWithFormat:@"Place : %d", indexPath.row];
@@ -150,12 +171,7 @@
 }
 
 
-- (void) objectsDidLoad:(NSError *)error
-{
-  [super objectsDidLoad:error];
-  
-  NSLog(@"error: %@", [error localizedDescription]);
-}
+
 
 
 #pragma mark -
