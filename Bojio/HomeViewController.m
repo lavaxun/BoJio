@@ -63,6 +63,13 @@
   //[[NSNotificationCenter defaultCenter] postNotificationName:@"refreshTable" object:self];
 
   [self loadUserInterests];
+    
+    PFPush *push = [[PFPush alloc] init];
+    [push setChannel:[NSString stringWithFormat:@"%@%@",@"push",@"5cEcPOAdbo"]];
+    [push setMessage:[NSString stringWithFormat:@"%@ created an %@ activity",[[PFUser currentUser] objectForKey:@"display_name"] , @"testing"]];
+    [push sendPushInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
+        //
+    }];
 }
 
 
@@ -102,13 +109,22 @@
     [relationQuery whereKey:@"parent" equalTo:[PFUser currentUser]];
     [relationQuery findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
         
+        
         PFObject* myRelation = [objects firstObject];
         NSArray* relationList = [myRelation objectForKey:@"relations"];
         NSMutableSet* friendList = [NSMutableSet setWithCapacity:[relationList count]];
 
+        PFInstallation *currentInstallation = [PFInstallation currentInstallation];
+        
         for(NSString* friendId in relationList){
             [friendList addObject:friendId];
+            [currentInstallation addUniqueObject:[NSString stringWithFormat:@"%@%@",@"push", friendId] forKey:@"channels"];
         }
+        
+        [currentInstallation saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
+            //
+            NSLog(@"error %@", [error localizedDescription]);
+        }];
         
         PFQuery *query = [PFQuery queryWithClassName:@"User_events"];
         [query includeKey:@"parent"];
