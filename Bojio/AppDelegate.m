@@ -21,9 +21,40 @@
     // Override point for customization after application launch.
   //Sample Test
   
+	
+  
     return YES;
 }
-							
+
+
+
+-(void)loadUserInterests {
+  
+  //------------------ Load the Users --------------------------
+  PFQuery *query = [PFQuery queryWithClassName:@"Store_interest"];
+  
+  [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
+	if (!error) {
+	  // The find succeeded.
+	  NSLog(@"Successfully retrieved %d interests.", objects.count);
+	  // Do something with the found objects
+	  
+	  
+	  AppDelegate *delegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
+	  delegate.userInterests = [NSMutableArray arrayWithArray: objects];
+	  
+	  NSLog(@"userInterests : %@", delegate.userInterests);
+	  
+	  
+	} else {
+	  // Log details of the failure
+	  NSLog(@"UserInterests Error: %@ %@", error, [error userInfo]);
+	}
+  }];
+}
+
+
+
 - (void)applicationWillResignActive:(UIApplication *)application
 {
 	// Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.

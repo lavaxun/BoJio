@@ -76,6 +76,8 @@
   
   NSLog(@"Getting user events");
   
+  
+  
   // Reload the recipes
   PFQuery *query = [PFQuery queryWithClassName:@"User_events"];
   //[query whereKey:@"parent" equalTo:@"Dan Stemkoski"];
@@ -87,7 +89,6 @@
 	  for (PFObject *object in objects) {
         NSLog(@"Event : %@", object.objectId);
 		NSLog(@"Event 22 : %@", [object objectForKey:@"eventDate"]);
-
 	  }
 	  
 	  eventsList = objects;
@@ -154,7 +155,7 @@
   NSString *eventPlace	= [[object objectForKey:@"location_info"] objectForKey:@"Name"];
   NSString *eventTime	= @"";
   NSString *eventDesc	= [object objectForKey:@"summary"];
-  NSString *eventType	= @"";
+  NSString *eventType	= @""; //[self getUserEventTypes: [object objectForKey:@"eventTypes"]];
   
   
   UILabel *eventNameLbl	  = (UILabel *)[cell.contentView viewWithTag:1];
