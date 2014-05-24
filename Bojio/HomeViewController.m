@@ -35,6 +35,43 @@
     // Dispose of any resources that can be recreated.
 }
 
+
+
+#pragma mark -
+
+ 
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+  return 10;
+}
+
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+  
+  static NSString *identifier = @"Cell";
+  UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:identifier];
+  if(cell == nil) {
+	cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:identifier];
+  }
+  
+  NSString *eventName = @"";
+  NSString *eventPlace = @"";
+  NSString *eventTime = @"";
+  NSString *eventDesc = @"";
+  NSString *eventType = @"";
+  
+  
+  
+  return cell;
+}
+
+
+
+
+#pragma mark -
+
+
+
+
 /*
 #pragma mark - Navigation
 
