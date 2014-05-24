@@ -32,8 +32,8 @@
     if ([PFUser currentUser] && // Check if a user is cached
         [PFFacebookUtils isLinkedWithUser:[PFUser currentUser]]) // Check if user is linked to Facebook
     {
-        [self performSegueWithIdentifier:@"after_login" sender:self];
-    }else{
+	  
+	  
 	  
 	  //------------------ Load the User Interests --------------------------
 	  AppDelegate *delegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
@@ -60,7 +60,7 @@
 			
 		  }
 		  
-
+		  
 		  
 		} else {
 		  // Log details of the failure
@@ -69,10 +69,14 @@
 	  }];
 	  
 	  
+        [self performSegueWithIdentifier:@"after_login" sender:self];
+	  
+    }else{
+	  
 	  
 	  
 	  // Push the next view controller without animation
-	  [self performSegueWithIdentifier:@"after_login" sender:self];
+	  //[self performSegueWithIdentifier:@"after_login" sender:self];
 	  
     }
 }
