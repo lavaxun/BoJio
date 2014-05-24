@@ -111,12 +111,15 @@
 #pragma mark -
 
 
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-  return 10;
-}
+//- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+//  return 10;
+//}
 
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath object:(PFObject *)object {
+  
+  
+  NSLog(@"PFObject : %@, %@", object, [object description]);
   
   static NSString *identifier = @"Cell";
   UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:identifier];

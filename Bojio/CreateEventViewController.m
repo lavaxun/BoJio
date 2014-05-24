@@ -29,6 +29,54 @@
     // Do any additional setup after loading the view.
 }
 
+
+#pragma mark - Create Event -
+
+
+- (IBAction)createEventBtnAction:(id)sender {
+  
+ 
+  // Create PFObject with recipe information
+  PFObject *event = [PFObject objectWithClassName:@"user_events"];
+  [event setObject:@"Test Event" forKey:@"title"];
+  [event setObject:@"Summary" forKey:@"summary"];
+
+  [event setObject:@"12-02-2014" forKey:@"eventDate"];
+  [event setObject:@"300" forKey:@"eventPeriod"];
+  [event setObject:@"" forKey:@"location"];
+  [event setObject:@"Summary" forKey:@"location_info"];
+  [event setObject:@"" forKey:@"eventTypes"];
+  [event setObject:@"" forKey:@"event_public"];
+
+  [event saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
+	NSLog(@"Succeeded : %d", succeeded);
+	NSLog(@"Error : %@", [error description]);
+	
+	NSString *msg = @"";
+	
+	if (!error) {
+	  msg = @"Successful......";
+	} else {
+	  msg = [NSString stringWithFormat:@"Upload Failure...... : %@", [error localizedDescription]];
+
+	}
+	
+	UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"" message:msg delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+	[alert show];
+
+	
+  }];
+
+  
+}
+
+
+
+#pragma mark -
+
+
+
+
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
@@ -47,3 +95,8 @@
 */
 
 @end
+
+
+
+
+
