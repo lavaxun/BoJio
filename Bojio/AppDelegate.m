@@ -18,6 +18,10 @@
 
     [Parse setApplicationId:@"Yi325bn8AIUm3a6BkE02BAzfOvjjVZCgdishElTt" clientKey:@"eSIvsSwDlEi2h9yawgZYeocCOeyCq545oWy5Azfl"];
     
+    [application registerForRemoteNotificationTypes:UIRemoteNotificationTypeBadge|
+     UIRemoteNotificationTypeAlert|
+     UIRemoteNotificationTypeSound];
+    
     [PFFacebookUtils initializeFacebook];
     
     // fb app id 284315155080351
@@ -28,8 +32,6 @@
   
     return YES;
 }
-
-
 
 -(void)loadUserInterests {
   
@@ -92,5 +94,24 @@
                   sourceApplication:sourceApplication
                         withSession:[PFFacebookUtils session]];
 }
+
+
+#pragma mark - Push notification
+
+- (void)application:(UIApplication *)application
+didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)newDeviceToken {
+    // Store the deviceToken in the current installation and save it to Parse.
+    PFInstallation *currentInstallation = [PFInstallation currentInstallation];
+    [currentInstallation setDeviceTokenFromData:newDeviceToken];
+    [currentInstallation saveInBackground];
+}
+
+
+- (void)application:(UIApplication *)application
+didReceiveRemoteNotification:(NSDictionary *)userInfo {
+    [PFPush handlePush:userInfo];
+}
+
+
 
 @end

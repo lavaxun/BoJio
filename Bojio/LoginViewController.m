@@ -35,6 +35,7 @@
         [self performSegueWithIdentifier:@"after_login" sender:self];
     }else{
 	  
+        /*
 	  //------------------ Load the User Interests --------------------------
 	  AppDelegate *delegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
 	  [delegate loadUserInterests];
@@ -54,7 +55,7 @@
 		  if (objects.count) {
 			
 			PFObject *object = [objects objectAtIndex:0];
-			delegate.objectIdForLoggedInUser = object.objectId;
+			delegate.objectIdForLoggedInUser = PFUser currentUserobject.objectId;
 			
 			NSLog(@"UserObjectId : %@", object.objectId);
 			
@@ -68,11 +69,11 @@
 		}
 	  }];
 	  
-	  
+	  */
 	  
 	  
 	  // Push the next view controller without animation
-	  [self performSegueWithIdentifier:@"after_login" sender:self];
+	  //[self performSegueWithIdentifier:@"after_login" sender:self];
 	  
     }
 }
