@@ -23,6 +23,7 @@
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
+                                    <action selector="loginAction:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="LCg-on-fB8"/>
                                     <segue destination="11N-2e-dpr" kind="push" identifier="LoginSegue" id="S8a-hv-lCp"/>
                                 </connections>
                             </button>
