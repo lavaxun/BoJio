@@ -10,7 +10,10 @@
 #import <QuartzCore/QuartzCore.h>
 #import "AppDelegate.h"
 
-@interface EventDetailsViewController ()
+@interface EventDetailsViewController () {
+  
+  NSArray *usersAttending;
+}
 
 @end
 
@@ -30,22 +33,43 @@
     [super viewDidLoad];
 	self.yesBtn.layer.cornerRadius = 10.0f;
   
-	//Event is viewed
-	[self eventIsViewed];
-
   
     // Do any additional setup after loading the view.
 	[self displayEventDetails];
+  
+  
+	//Display list of attending users
+	[self displayListOfUsersAttending];
 }
 
 
 #pragma mark -
 
--(void)eventIsViewed {
-	
-  NSLog(@"Event is viewed");
-}
 
+-(void)displayListOfUsersAttending {
+  
+  
+  
+  PFQuery *query = [PFQuery queryWithClassName:@"Event_attendance"];
+  [query whereKey:@"eventId" equalTo:self.object];
+  
+  
+  [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
+	if (!error) {
+	  // The find succeeded.
+	  NSLog(@"----Successfully retrieved %d Users Attending-------", objects.count);
+	  
+	  usersAttending = objects;
+	  NSLog(@"usersAttending : %@", usersAttending);
+	  [self.aTableView reloadData];
+	  
+	} else {
+	  // Log details of the failure
+	  NSLog(@"User's Attending Error: %@ %@", error, [error userInfo]);
+	}
+  }];
+  
+}
 
 
 
@@ -68,40 +92,23 @@
 
 
 
--(NSString *)getUserEventTypes : (id)eventTypes {
+-(NSString *)getUserEventTypes : (NSArray *)eventTypes {
   NSString *interest = @"";
   
-  AppDelegate *delegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
   
-  if([eventTypes isKindOfClass:[NSArray class]]) {
+  for(int j=0; j < eventTypes.count; j++) {
 	
-	for(int i=0; i < [eventTypes count]; i ++) {
-	  
-	  NSString *eventTypeId = [eventTypes objectAtIndex:i];
-	  //NSLog(@"eventTypeId : %@", eventTypeId);
-	  
-	  for(int j=0; j < delegate.userInterests.count; j++) {
-		
-		PFObject *object = delegate.userInterests[j];
-		//NSLog(@"object.objectId : %@", object.objectId);
-		
-		if ([object.objectId isEqualToString:eventTypeId]) {
-		  interest = [NSString stringWithFormat:@"%@%@%@", interest, (interest.length)?@", ":@"", [object objectForKey:@"title"]];
-		}
-	  }
-	}
-	
-  } else if([eventTypes isKindOfClass:[NSString class]]) {
-	;
+	interest = eventTypes[j];
+	interest = [NSString stringWithFormat:@"%@,", interest];
   }
   
-  NSLog(@"interest 22 : %@", interest);
   
-  if([interest length]) {
-	
-  }
+  NSMutableArray *components = (NSMutableArray *)[interest componentsSeparatedByString:@","];
+  [components removeLastObject];
+  interest = [components componentsJoinedByString:@","];
+  //NSLog(@"interest : %@", interest);
   
-  return interest;
+    return interest;
   
 }
 
@@ -113,6 +120,49 @@
 - (IBAction)yesBtnAction:(id)sender {
   NSLog(@"Yes Button Clicked");
 }
+
+
+
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+  
+  NSLog(@"User's Attending Count : %d", usersAttending.count);
+  return [usersAttending count];
+}
+
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+  
+  static NSString *identifier = @"Cell";
+  UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:identifier];
+  if(cell == nil) {
+	cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:identifier];
+  }
+  
+  
+  PFObject *object		= [usersAttending objectAtIndex:indexPath.row];
+  
+  NSLog(@"Event Attendance : %@", object);
+  
+  BOOL attendance	= [[object objectForKey:@"attendance"] boolValue];
+  
+  NSLog(@"Attendance : %d", attendance);
+  
+  UIImageView *imageView  = (UIImageView *)[cell.contentView viewWithTag:1];
+  UILabel *userNameLbl	  = (UILabel *)[cell.contentView viewWithTag:2];
+
+  //imageView.image		  = @"";
+//  userNameLbl.text		  = eventType;
+  if(attendance) {
+	imageView.image = [UIImage imageNamed:@"green.png"];
+  } else {
+	imageView.image = [UIImage imageNamed:@"red.png"];
+  }
+  
+  
+  return cell;
+}
+
 
 
 #pragma mark -

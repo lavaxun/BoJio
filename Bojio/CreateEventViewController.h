@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface CreateEventViewController : UIViewController <UITextFieldDelegate>
+@interface CreateEventViewController : UIViewController <UITextFieldDelegate, UITextViewDelegate, UIActionSheetDelegate>
 
 
 
@@ -17,6 +17,8 @@
 @property (weak, nonatomic) IBOutlet UITextField *eventTimeTxtFld;
 @property (weak, nonatomic) IBOutlet UITextField *eventTypeTxtFld;
 @property (weak, nonatomic) IBOutlet UITextView *eventDescTxtView;
+
+@property (nonatomic, strong)  UIActionSheet *actionSheet;
 
 @end
  

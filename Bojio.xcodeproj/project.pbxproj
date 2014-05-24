@@ -25,6 +25,8 @@
 		5A1C89341930770B0078ADA4 /* CreateEventViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A1C89331930770B0078ADA4 /* CreateEventViewController.m */; };
 		5A1C89371930771D0078ADA4 /* EventDetailsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A1C89361930771D0078ADA4 /* EventDetailsViewController.m */; };
 		5A1C893A193077340078ADA4 /* ProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A1C8939193077340078ADA4 /* ProfileViewController.m */; };
+		5A4144501931121F007C0608 /* green.png in Resources */ = {isa = PBXBuildFile; fileRef = 5A41444E1931121F007C0608 /* green.png */; };
+		5A4144511931121F007C0608 /* red.png in Resources */ = {isa = PBXBuildFile; fileRef = 5A41444F1931121F007C0608 /* red.png */; };
 		A189A36919307A2A006DF3FE /* Parse.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A189A36819307A2A006DF3FE /* Parse.framework */; };
 		A189A37B19307B29006DF3FE /* AdSupport.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A189A36A19307B29006DF3FE /* AdSupport.framework */; };
 		A189A37D19307B29006DF3FE /* Accounts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A189A36C19307B29006DF3FE /* Accounts.framework */; };
@@ -84,6 +86,8 @@
 		5A1C89361930771D0078ADA4 /* EventDetailsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EventDetailsViewController.m; sourceTree = "<group>"; };
 		5A1C8938193077340078ADA4 /* ProfileViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProfileViewController.h; sourceTree = "<group>"; };
 		5A1C8939193077340078ADA4 /* ProfileViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProfileViewController.m; sourceTree = "<group>"; };
+		5A41444E1931121F007C0608 /* green.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = green.png; sourceTree = "<group>"; };
+		5A41444F1931121F007C0608 /* red.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = red.png; sourceTree = "<group>"; };
 		A189A36819307A2A006DF3FE /* Parse.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Parse.framework; sourceTree = "<group>"; };
 		A189A36A19307B29006DF3FE /* AdSupport.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AdSupport.framework; path = System/Library/Frameworks/AdSupport.framework; sourceTree = SDKROOT; };
 		A189A36C19307B29006DF3FE /* Accounts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accounts.framework; path = System/Library/Frameworks/Accounts.framework; sourceTree = SDKROOT; };
@@ -145,6 +149,7 @@
 		5A1C88EB193074100078ADA4 = {
 			isa = PBXGroup;
 			children = (
+				5A41444D1931121F007C0608 /* images */,
 				5A1C88FD193074110078ADA4 /* Bojio */,
 				5A1C891C193074110078ADA4 /* BojioTests */,
 				5A1C88F6193074100078ADA4 /* Frameworks */,
@@ -242,6 +247,15 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
+		5A41444D1931121F007C0608 /* images */ = {
+			isa = PBXGroup;
+			children = (
+				5A41444E1931121F007C0608 /* green.png */,
+				5A41444F1931121F007C0608 /* red.png */,
+			);
+			path = images;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -320,6 +334,8 @@
 			files = (
 				5A0A96051930997F0063384F /* FBUserSettingsViewResources.bundle in Resources */,
 				5A1C8910193074110078ADA4 /* Images.xcassets in Resources */,
+				5A4144501931121F007C0608 /* green.png in Resources */,
+				5A4144511931121F007C0608 /* red.png in Resources */,
 				5A1C8902193074110078ADA4 /* InfoPlist.strings in Resources */,
 				5A1C890B193074110078ADA4 /* Main.storyboard in Resources */,
 			);
