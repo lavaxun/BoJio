@@ -11,7 +11,7 @@
 #import "AppDelegate.h"
 
 @interface EventDetailsViewController () {
-  
+    NSMutableDictionary *attendeeNames;
   NSArray *usersAttending;
 }
 
@@ -32,11 +32,12 @@
 {
     [super viewDidLoad];
 	self.yesBtn.layer.cornerRadius = 10.0f;
-  
+    self.yesBtn.hidden = YES;
   
     // Do any additional setup after loading the view.
 	[self displayEventDetails];
   
+    attendeeNames = [NSMutableDictionary dictionary];
   
 	//Display list of attending users
 	[self displayListOfUsersAttending];
@@ -48,14 +49,19 @@
 
 -(void)displayListOfUsersAttending {
   
-  
-  
   PFQuery *query = [PFQuery queryWithClassName:@"Event_attendance"];
   [query whereKey:@"eventId" equalTo:self.object];
   
   
   [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
 	if (!error) {
+        
+        for(PFObject* obj in objects){
+            if([[[obj objectForKey:@"userId"] objectId] isEqualToString:[[PFUser currentUser] objectId]]){
+                self.yesBtn.hidden = NO;
+                break;
+            }
+        }
 	  // The find succeeded.
 	  NSLog(@"----Successfully retrieved %d Users Attending-------", objects.count);
 	  
@@ -118,6 +124,17 @@
 
 
 - (IBAction)yesBtnAction:(id)sender {
+    
+    PFObject *myPost = [PFObject objectWithClassName:@"Event_attendance"];
+    myPost[@"attendance"] = [NSNumber numberWithBool:YES];
+    myPost[@"summary"] = @"I will be there";
+    
+    myPost[@"eventId"] = self.object;
+    myPost[@"userId"] = [PFUser currentUser];
+    
+    // This will save both myPost and myComment
+    [myPost saveInBackground];
+    
   NSLog(@"Yes Button Clicked");
 }
 
@@ -158,38 +175,19 @@
   
   
 //  //----------- Get user names from userId ------------------
-//  
-  NSLog(@"object 2323 : %@", [object objectForKey:@"userId"]);
-  NSLog(@"object 2222 : %@", [[object objectForKey:@"userId"] objectId]);
+    NSString* userId = [[object objectForKey:@"userId"] objectId];
+    PFUser *who = nil;
+    
+    if([attendeeNames objectForKey:userId]){
+        who = [attendeeNames objectForKey:userId];
+    }else{
+        PFQuery *query = [PFUser query];
+        who = (PFUser*)[query getObjectWithId:userId];
+        [attendeeNames setObject:who forKey:userId];
+    }
 
-
-//  PFUser *userObj = (PFUser *)[object objectForKey:@"userId"];
-//  NSLog(@"Username : %@", [userObj objectForKey:@"username"]);
-//  
-//  
-//  
-//  
-//  PFQuery *query = [PFQuery queryWithClassName:@"User"];
-//  //[query whereKey:@"objectId" equalTo:[object objectForKey:@"userId"]];
-//  
-//  
-//  [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
-//	if (!error) {
-//	  // The find succeeded.
-//	  NSLog(@"----Successfully retrieved %d Users Names-------", objects.count);
-//	  
-//	  //usersAttending = objects;
-//	  NSLog(@"users 123 : %@", objects);
-//	  //[self.aTableView reloadData];
-//	  
-//	} else {
-//	  // Log details of the failure
-//	  NSLog(@"User's name Error: %@ %@", error, [error userInfo]);
-//	}
-//  }];
-  
-  
-  
+    userNameLbl.text = [who objectForKey:@"display_name"];
+    
   return cell;
 }
 

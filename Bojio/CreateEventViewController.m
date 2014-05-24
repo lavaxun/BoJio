@@ -85,6 +85,12 @@
 	
 	if (!error) {
 	  msg = @"Event Created Successfully";
+        PFPush *push = [[PFPush alloc] init];
+        [push setChannel:[NSString stringWithFormat:@"%@%@",@"push",[[PFUser currentUser] objectId]]];
+        [push setMessage:[NSString stringWithFormat:@"%@ created an %@ activity",[[PFUser currentUser] objectForKey:@"display_name"] , [[event objectForKey:@"eventTypes"] firstObject]]];
+        [push sendPushInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
+            //
+        }];
 	} else {
 	  msg = @"Failed to create event";
 
