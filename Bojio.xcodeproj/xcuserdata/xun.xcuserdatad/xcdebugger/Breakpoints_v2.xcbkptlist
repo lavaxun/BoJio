@@ -424,22 +424,6 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Bojio/LoginViewController.m"
-            timestampString = "422623948.577909"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "124"
-            endingLineNumber = "124"
-            landmarkName = "-loginAction:"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Bojio/LoginViewController.m"
             timestampString = "422623975.534543"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"

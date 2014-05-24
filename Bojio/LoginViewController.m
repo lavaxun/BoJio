@@ -119,24 +119,23 @@
                             }
                             
                             PFObject *userRelationObject = [PFObject objectWithClassName:@"User_relations"];
-                            userRelationObject[@"relations"] = friendList;
                             userRelationObject[@"parent"] = [PFUser currentUser];
-                            [userRelationObject saveInBackground];
                             
                             PFQuery *query = [PFQuery queryWithClassName:@"User"];
                             [query whereKey:@"facebook_id" containedIn:friendList];
                             
                             [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
                                 if (!error) {
-                                    NSLog(@"Successfully retrieved %d scores.", objects.count);
                                     for (PFObject *object in objects) {
-                                        NSLog(@"%@", object.objectId);
+                                        NSLog(@"adding [%@]", object.objectId);
+                                        [userRelationObject addUniqueObject:[object objectId] forKey:@"relations"];
                                     }
                                 } else {
-                                    // Log details of the failure
                                     NSLog(@"Error: %@ %@", error, [error userInfo]);
                                 }
                             }];
+                            [userRelationObject saveInBackground];
+
                         }
                     }];
                     
