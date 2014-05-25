@@ -161,7 +161,14 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Desc" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="J5G-ds-yJd">
-                                <rect key="frame" x="20" y="253" width="39" height="21"/>
+                                <rect key="frame" x="20" y="284" width="39" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Public" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="a3i-Od-psp">
+                                <rect key="frame" x="20" y="247" width="39" height="21"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
@@ -182,7 +189,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="JsX-c4-Qni">
-                                <rect key="frame" x="53" y="391" width="214" height="30"/>
+                                <rect key="frame" x="53" y="400" width="214" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Create Event">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
@@ -227,32 +234,69 @@
                                     <outlet property="delegate" destination="mU9-Xo-fUp" id="DfC-aH-6n5"/>
                                 </connections>
                             </textField>
-                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" text="Description" id="tAU-o2-ZaJ">
-                                <rect key="frame" x="83" y="245" width="203" height="101"/>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" text="Hey, I created an event." id="tAU-o2-ZaJ">
+                                <rect key="frame" x="83" y="276" width="203" height="76"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="12"/>
-                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                <textInputTraits key="textInputTraits" autocorrectionType="no" returnKeyType="done" enablesReturnKeyAutomatically="YES"/>
                                 <connections>
                                     <outlet property="delegate" destination="mU9-Xo-fUp" id="umY-gp-cco"/>
                                 </connections>
                             </textView>
+                            <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" id="su0-se-KIX">
+                                <rect key="frame" x="83" y="242" width="51" height="31"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <connections>
+                                    <action selector="switchValueChanged:" destination="mU9-Xo-fUp" eventType="valueChanged" id="VLc-CK-eka"/>
+                                </connections>
+                            </switch>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
                     <navigationItem key="navigationItem" id="7Ts-dh-1bT"/>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics"/>
                     <connections>
+                        <outlet property="aSwitch" destination="su0-se-KIX" id="Uqe-ZC-fTY"/>
                         <outlet property="eventDescTxtView" destination="tAU-o2-ZaJ" id="oOI-dF-uAy"/>
                         <outlet property="eventNameTxtFld" destination="c8C-DB-s0K" id="aiC-95-9UG"/>
                         <outlet property="eventPlaceTxtFld" destination="uiF-uW-tPj" id="qmr-Et-ZT5"/>
                         <outlet property="eventTimeTxtFld" destination="QSk-Mj-6R1" id="W87-nv-ov1"/>
                         <outlet property="eventTypeTxtFld" destination="DLP-DZ-iWW" id="DJs-Nh-Fse"/>
+                        <segue destination="Tqp-yb-mxB" kind="push" identifier="MapSegue" id="Yvu-6C-X9H"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="cwR-UY-93v" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="677" y="580"/>
+            <point key="canvasLocation" x="692" y="813"/>
+        </scene>
+        <!--Map View Controller-->
+        <scene sceneID="Kt0-CT-77t">
+            <objects>
+                <viewController id="Tqp-yb-mxB" customClass="MapViewController" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="ZEH-yZ-moo">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" id="aJu-2l-SMC">
+                                <rect key="frame" x="0.0" y="67" width="320" height="413"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                            </mapView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="j60-eh-PhT">
+                        <barButtonItem key="rightBarButtonItem" title="Save Location" id="Cmy-KX-OWp">
+                            <connections>
+                                <action selector="saveLocationBtnAction:" destination="Tqp-yb-mxB" id="bDH-hG-kNx"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <simulatedScreenMetrics key="simulatedDestinationMetrics"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="DMe-pC-4d7" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1047" y="1150"/>
         </scene>
         <!--Profile View Controller - Profile-->
         <scene sceneID="uOf-bD-vZ2">

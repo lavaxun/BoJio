@@ -11,6 +11,7 @@
 @interface CreateEventViewController () {
   
   NSArray *userInterests;
+  BOOL isPublic;
 }
 
 @end
@@ -31,6 +32,7 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
   
+  isPublic = NO;
   [self loadUserInterests];
 }
 
@@ -138,7 +140,7 @@
   
   PFUser *parentPointer	  = [PFUser currentUser];
   NSNumber *eventPeriod	  = [NSNumber numberWithInt:120];
-  NSNumber *event_Public  = [NSNumber numberWithBool:NO];
+  NSNumber *event_Public  = [NSNumber numberWithBool:isPublic];
 
   CLLocationCoordinate2D coordinate ;
   coordinate.latitude = 10.093f;
@@ -460,6 +462,17 @@
   
 }
 
+#pragma mark - 
+
+
+- (IBAction)switchValueChanged:(id)sender {
+
+  if ([sender isOn]) {
+    isPublic = YES;
+  } else {
+	isPublic = NO;
+  }
+}
 
 
 
