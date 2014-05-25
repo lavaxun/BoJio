@@ -23,8 +23,8 @@
 		5A1C89341930770B0078ADA4 /* CreateEventViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A1C89331930770B0078ADA4 /* CreateEventViewController.m */; };
 		5A1C89371930771D0078ADA4 /* EventDetailsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A1C89361930771D0078ADA4 /* EventDetailsViewController.m */; };
 		5A1C893A193077340078ADA4 /* ProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A1C8939193077340078ADA4 /* ProfileViewController.m */; };
-		5A4144501931121F007C0608 /* green.png in Resources */ = {isa = PBXBuildFile; fileRef = 5A41444E1931121F007C0608 /* green.png */; };
-		5A4144511931121F007C0608 /* red.png in Resources */ = {isa = PBXBuildFile; fileRef = 5A41444F1931121F007C0608 /* red.png */; };
+		5A7AEEE419317981005AD6FD /* MapViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A7AEEE319317981005AD6FD /* MapViewController.m */; };
+		5A7AEEE619317ACC005AD6FD /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5A7AEEE519317ACC005AD6FD /* MapKit.framework */; };
 		A189A36919307A2A006DF3FE /* Parse.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A189A36819307A2A006DF3FE /* Parse.framework */; };
 		A189A37B19307B29006DF3FE /* AdSupport.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A189A36A19307B29006DF3FE /* AdSupport.framework */; };
 		A189A37D19307B29006DF3FE /* Accounts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A189A36C19307B29006DF3FE /* Accounts.framework */; };
@@ -92,6 +92,9 @@
 		5A1C89361930771D0078ADA4 /* EventDetailsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EventDetailsViewController.m; sourceTree = "<group>"; };
 		5A1C8938193077340078ADA4 /* ProfileViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProfileViewController.h; sourceTree = "<group>"; };
 		5A1C8939193077340078ADA4 /* ProfileViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProfileViewController.m; sourceTree = "<group>"; };
+		5A7AEEE219317981005AD6FD /* MapViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MapViewController.h; sourceTree = "<group>"; };
+		5A7AEEE319317981005AD6FD /* MapViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MapViewController.m; sourceTree = "<group>"; };
+		5A7AEEE519317ACC005AD6FD /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		9A0AD4E8558A40C68033DCB3 /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = "<group>"; };
 		A189A36819307A2A006DF3FE /* Parse.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Parse.framework; sourceTree = "<group>"; };
 		A189A36A19307B29006DF3FE /* AdSupport.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AdSupport.framework; path = System/Library/Frameworks/AdSupport.framework; sourceTree = SDKROOT; };
@@ -127,9 +130,10 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A189A38119307B29006DF3FE /* CoreLocation.framework in Frameworks */,
+				5A7AEEE619317ACC005AD6FD /* MapKit.framework in Frameworks */,
 				A189A3A11930DAC7006DF3FE /* Social.framework in Frameworks */,
 				A189A3A31930DB4F006DF3FE /* FacebookSDK.framework in Frameworks */,
-				A189A38119307B29006DF3FE /* CoreLocation.framework in Frameworks */,
 				A189A38B19307B2A006DF3FE /* UIKit.framework in Frameworks */,
 				A189A38A19307B2A006DF3FE /* SystemConfiguration.framework in Frameworks */,
 				5A1C88FC193074110078ADA4 /* UIKit.framework in Frameworks */,
@@ -186,6 +190,7 @@
 		5A1C88F6193074100078ADA4 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				5A7AEEE519317ACC005AD6FD /* MapKit.framework */,
 				A189A3A21930DB4F006DF3FE /* FacebookSDK.framework */,
 				A189A3A01930DAC7006DF3FE /* Social.framework */,
 				A189A39E1930C797006DF3FE /* FBUserSettingsViewResources.bundle */,
@@ -226,6 +231,8 @@
 				5A1C8930193076FD0078ADA4 /* HomeViewController.m */,
 				5A1C89321930770B0078ADA4 /* CreateEventViewController.h */,
 				5A1C89331930770B0078ADA4 /* CreateEventViewController.m */,
+				5A7AEEE219317981005AD6FD /* MapViewController.h */,
+				5A7AEEE319317981005AD6FD /* MapViewController.m */,
 				5A1C89351930771D0078ADA4 /* EventDetailsViewController.h */,
 				5A1C89361930771D0078ADA4 /* EventDetailsViewController.m */,
 				5A1C8938193077340078ADA4 /* ProfileViewController.h */,
@@ -275,8 +282,6 @@
 		5A41444D1931121F007C0608 /* images */ = {
 			isa = PBXGroup;
 			children = (
-				5A41444E1931121F007C0608 /* green.png */,
-				5A41444F1931121F007C0608 /* red.png */,
 			);
 			path = images;
 			sourceTree = "<group>";
@@ -427,6 +432,7 @@
 				5A1C892E193076EE0078ADA4 /* LoginViewController.m in Sources */,
 				5A1C89341930770B0078ADA4 /* CreateEventViewController.m in Sources */,
 				5A1C893A193077340078ADA4 /* ProfileViewController.m in Sources */,
+				5A7AEEE419317981005AD6FD /* MapViewController.m in Sources */,
 				5A1C89371930771D0078ADA4 /* EventDetailsViewController.m in Sources */,
 				5A1C890E193074110078ADA4 /* ViewController.m in Sources */,
 				5A1C8908193074110078ADA4 /* AppDelegate.m in Sources */,
