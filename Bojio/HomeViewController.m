@@ -65,6 +65,7 @@
   [self loadUserInterests];
     
     PFPush *push = [[PFPush alloc] init];
+    [push setData:@{@"eventId":@"KyoN45OVFt"}];
     [push setChannel:[NSString stringWithFormat:@"%@%@",@"push",@"5cEcPOAdbo"]];
     [push setMessage:[NSString stringWithFormat:@"%@ created an %@ activity",[[PFUser currentUser] objectForKey:@"display_name"] , @"testing"]];
     [push sendPushInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
