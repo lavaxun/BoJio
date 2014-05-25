@@ -127,15 +127,30 @@
 
   
   NSDateFormatter *df = [[NSDateFormatter alloc] init];
-  [df setDateFormat:@"MMM dd, yyyy, HH:mm"];
+  [df setDateFormat:@"dd-MMM-yyyy HH:mm:ss a"];
   NSDate *eventDate = [df dateFromString:eventTimeTxtFld];
   
   NSLog(@"Event Date : %@", eventDate);
+  if(!eventDate) {
+	NSLog(@"Failed to create Event: No eventDate found");
+  }
   
-  NSNumber *event_Public = [NSNumber numberWithBool:NO];
   
-  PFUser *parentPointer = [PFUser currentUser];
+  PFUser *parentPointer	  = [PFUser currentUser];
+  NSNumber *eventPeriod	  = [NSNumber numberWithInt:120];
+  NSNumber *event_Public  = [NSNumber numberWithBool:NO];
+
+  CLLocationCoordinate2D coordinate ;
+  coordinate.latitude = 10.093f;
+  coordinate.longitude = 17.8282;
   
+  PFGeoPoint *geoPoint = [PFGeoPoint geoPointWithLatitude:coordinate.latitude
+												longitude:coordinate.longitude];
+  
+  
+  PFObject *locationInfoObj = [PFObject objectWithClassName:@"LocationInfoObj"];
+  [locationInfoObj setObject:@"Address name" forKey:@"Name"];
+  [locationInfoObj setObject:@"This is the address" forKey:@"Address"];
   
   
   
@@ -144,9 +159,9 @@
   [event setObject:eventTitle		forKey:@"title"];
   [event setObject:eventDescTxtView forKey:@"summary"];
   [event setObject:eventDate		forKey:@"eventDate"];
-  [event setObject:@"120"			forKey:@"eventPeriod"];
-  [event setObject:@""				forKey:@"location"];
-  [event setObject:@"Summary"		forKey:@"location_info"];
+  [event setObject:eventPeriod		forKey:@"eventPeriod"];
+  [event setObject:geoPoint			forKey:@"location"];
+  [event setObject:locationInfoObj	forKey:@"location_info"];
   [event setObject:eventTypesArr	forKey:@"eventTypes"];
   [event setObject:event_Public		forKey:@"event_public"];
   [event setObject:parentPointer	forKey:@"parent"];
