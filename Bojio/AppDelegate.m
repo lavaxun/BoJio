@@ -15,7 +15,8 @@
 {
     // to get currently login user id
     // [[PFUser currentUser] objectId]
-
+    [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
+    
     [Parse setApplicationId:@"Yi325bn8AIUm3a6BkE02BAzfOvjjVZCgdishElTt" clientKey:@"eSIvsSwDlEi2h9yawgZYeocCOeyCq545oWy5Azfl"];
     
     [application registerForRemoteNotificationTypes:UIRemoteNotificationTypeBadge|

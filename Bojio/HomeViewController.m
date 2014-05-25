@@ -11,6 +11,9 @@
 #import "EventDetailsViewController.h"
 
 @interface HomeViewController () {
+    BOOL _isNavBarHidden;
+    CGFloat _originY;
+    CGFloat _previousY;
     NSArray *eventsList;
     NSDateFormatter *_dateFormatter;
 }
@@ -64,13 +67,13 @@
 
   //[self loadUserInterests];
     
-    PFPush *push = [[PFPush alloc] init];
-    [push setData:@{@"eventId":@"KyoN45OVFt"}];
-    [push setChannel:[NSString stringWithFormat:@"%@%@",@"push",@"5cEcPOAdbo"]];
-    [push setMessage:[NSString stringWithFormat:@"%@ created an %@ activity",[[PFUser currentUser] objectForKey:@"display_name"] , @"testing"]];
-    [push sendPushInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
-        //
-    }];
+//    PFPush *push = [[PFPush alloc] init];
+//    [push setData:@{@"eventId":@"KyoN45OVFt"}];
+//    [push setChannel:[NSString stringWithFormat:@"%@%@",@"push",@"5cEcPOAdbo"]];
+//    [push setMessage:[NSString stringWithFormat:@"%@ created an %@ activity",[[PFUser currentUser] objectForKey:@"display_name"] , @"testing"]];
+//    [push sendPushInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
+//        //
+//    }];
 }
 
 
@@ -104,12 +107,9 @@
 
 - (void)refreshTable:(NSNotification *) notification
 {
-  
-  
     PFQuery *relationQuery = [PFQuery queryWithClassName:@"User_relations"];
     [relationQuery whereKey:@"parent" equalTo:[PFUser currentUser]];
     [relationQuery findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
-        
         
         PFObject* myRelation = [objects firstObject];
         NSArray* relationList = [myRelation objectForKey:@"relations"];
@@ -166,7 +166,6 @@
 }
 
 
-
 #pragma mark -
 
 - (void)viewDidUnload
@@ -178,9 +177,8 @@
 
 #pragma mark - TableView
 
-
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-  
+    
   NSLog(@"EventsList Count : %d", eventsList.count);
   return [eventsList count];
 }
@@ -203,9 +201,6 @@
     NSString *eventTime	= [_dateFormatter stringFromDate:eventDate];
     NSString *eventType	= [[object objectForKey:@"eventTypes"] firstObject];
     NSString *eventDesc	= [object objectForKey:@"summary"];
-  
-  
-  
   
     UIImage *eventImg = nil;
     if([eventType isEqualToString:@"Gym"]){
@@ -244,13 +239,13 @@
     return UITableViewAutomaticDimension;
 }
 
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
- 
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+  
   selectedRow = indexPath.row;
   [self performSegueWithIdentifier:@"EventDetailSegue" sender:self];
 
 }
-
 
 
 #pragma mark - User Interests
@@ -322,6 +317,53 @@
 
 #pragma mark -
 
+
+-(void)scrollViewWillBeginDragging:(UIScrollView *)scrollView
+{
+    _originY = _previousY = scrollView.contentOffset.y;
+}
+
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView
+{
+    CGFloat currentOffset = scrollView.contentOffset.y;
+    CGFloat scrolledDistance = _originY - currentOffset;
+    CGFloat lastScrolledDistance = _previousY - currentOffset;
+    _previousY = currentOffset;
+    
+    if(scrolledDistance < 0){
+        if(scrollView.isTracking && abs(lastScrolledDistance) > 1){
+            if(_isNavBarHidden)
+                return;
+            
+            _isNavBarHidden = YES;
+            [self.navigationController setNavigationBarHidden:YES animated:YES];
+            [[UIApplication sharedApplication] setStatusBarHidden:YES withAnimation:UIStatusBarAnimationFade];
+            
+        }
+    }else{
+        if(scrollView.isTracking && abs(lastScrolledDistance) > 1){
+            if(!_isNavBarHidden)
+                return;
+            
+            _isNavBarHidden = NO;
+            [self.navigationController setNavigationBarHidden:NO animated:YES];
+            [[UIApplication sharedApplication] setStatusBarHidden:NO withAnimation:UIStatusBarAnimationFade];
+            
+        }
+    }
+}
+
+
+-(BOOL)scrollViewShouldScrollToTop:(UIScrollView *)scrollView
+{
+    if(_isNavBarHidden)
+        return YES;
+    
+    _isNavBarHidden = YES;
+    [self.navigationController setNavigationBarHidden:YES animated:YES];
+    [[UIApplication sharedApplication] setStatusBarHidden:YES withAnimation:UIStatusBarAnimationFade];
+    return YES;
+}
 
 
 

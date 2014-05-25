@@ -8,11 +8,15 @@
 
 #import "EventDetailsViewController.h"
 #import <QuartzCore/QuartzCore.h>
+#import <SDWebImage/UIImageView+WebCache.h>
 #import "AppDelegate.h"
 
 @interface EventDetailsViewController () {
+    BOOL _isNavBarHidden;
+    CGFloat _originY;
+    CGFloat _previousY;
     NSMutableDictionary *attendeeNames;
-  NSArray *usersAttending;
+    NSArray *usersAttending;
 }
 
 @end
@@ -31,9 +35,14 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-	self.yesBtn.layer.cornerRadius = 10.0f;
+    self.hostPicture.layer.masksToBounds = YES;
+    self.hostPicture.layer.cornerRadius = self.hostPicture.bounds.size.width/2.0f;
+    self.hostPicture.layer.borderWidth = 2.0f;
+    self.hostPicture.layer.borderColor = [[UIColor whiteColor] CGColor];
+
     self.yesBtn.hidden = YES;
-  
+    self.noBtn.hidden = YES;
+
     // Do any additional setup after loading the view.
 	[self displayEventDetails];
   
@@ -59,6 +68,7 @@
         for(PFObject* obj in objects){
             if([[[obj objectForKey:@"userId"] objectId] isEqualToString:[[PFUser currentUser] objectId]]){
                 self.yesBtn.hidden = NO;
+                self.noBtn.hidden = NO;
                 break;
             }
         }
@@ -67,8 +77,8 @@
 	  
 	  usersAttending = objects;
 	  NSLog(@"usersAttending : %@", usersAttending);
-	  [self.aTableView reloadData];
-	  
+	  [self.tableView reloadData];
+    
 	} else {
 	  // Log details of the failure
 	  NSLog(@"User's Attending Error: %@ %@", error, [error userInfo]);
@@ -84,11 +94,35 @@
 
 	AppDelegate *delegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
 
-	self.eventNameLbl.text	= [self.object objectForKey:@"title"];
-	self.eventPlaceLbl.text = [[self.object objectForKey:@"location_info"] objectForKey:@"Name"];
-	self.eventDateTime.text = [delegate formatDate: [self.object objectForKey:@"eventDate"]];
-	self.eventDescLbl.text	= [self.object objectForKey:@"summary"];
-	self.eventTypeLbl.text	= [self getUserEventTypes: [self.object objectForKey:@"eventTypes"]];
+      NSString* eventType = [self getUserEventTypes: [self.object objectForKey:@"eventTypes"]];
+      UIImage *eventImg = nil;
+      if([eventType isEqualToString:@"Gym"]){
+          eventImg = [UIImage imageNamed:@"gym.jpg"];
+      }else if([eventType isEqualToString:@"Breakfast"]){
+          eventImg = [UIImage imageNamed:@"meal.jpg"];
+      }else if([eventType isEqualToString:@"Lunch"]){
+          eventImg = [UIImage imageNamed:@"meal.jpg"];
+      }else if([eventType isEqualToString:@"Dinner"]){
+          eventImg = [UIImage imageNamed:@"meal.jpg"];
+      }else if([eventType isEqualToString:@"Movie"]){
+          eventImg = [UIImage imageNamed:@"movie.jpg"];
+      }else if([eventType isEqualToString:@"Hangout"]){
+          eventImg = [UIImage imageNamed:@"hangout.jpg"];
+      }else{
+          eventImg = [UIImage imageNamed:@"hangout.jpg"];
+      }
+      
+      NSString* userId = [[self.object objectForKey:@"parent"] objectId];
+      PFQuery *query = [PFUser query];
+      PFUser *who = (PFUser*)[query getObjectWithId:userId];
+      
+      self.eventNameLbl.text	= [self.object objectForKey:@"title"];
+      self.eventPlaceLbl.text = [[self.object objectForKey:@"location_info"] objectForKey:@"Name"];
+      self.eventDateTime.text = [delegate formatDate: [self.object objectForKey:@"eventDate"]];
+      self.eventDescLbl.text	= [self.object objectForKey:@"summary"];
+      self.eventType.image = eventImg;
+      [self.hostPicture setImageWithURL:[NSURL URLWithString:[who objectForKey:@"profile_picture"]]];
+	//self.eventTypeLbl.text	= [self getUserEventTypes: [self.object objectForKey:@"eventTypes"]];
 	
 	
   } else {
@@ -135,10 +169,8 @@
     // This will save both myPost and myComment
     [myPost saveInBackground];
     
-  NSLog(@"Yes Button Clicked");
+    NSLog(@"Yes Button Clicked");
 }
-
-
 
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
@@ -156,21 +188,25 @@
 	cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:identifier];
   }
   
-  
   PFObject *object		= [usersAttending objectAtIndex:indexPath.row];
   
   NSLog(@"Event Attendance : %@", object);
   
   BOOL attendance	= [[object objectForKey:@"attendance"] boolValue];
   
-  UIImageView *imageView  = (UIImageView *)[cell.contentView viewWithTag:1];
+    UIView* thickBorder = (UIView*)[cell.contentView viewWithTag:99];
+//  UIImageView *imageView  = (UIImageView *)[cell.contentView viewWithTag:1];
   UILabel *userNameLbl	  = (UILabel *)[cell.contentView viewWithTag:2];
 
 //  userNameLbl.text		  = eventType;
   if(attendance) {
-	imageView.image = [UIImage imageNamed:@"green.png"];
+      thickBorder.backgroundColor = [UIColor colorWithRed:46/255.0f green:204/255.0f blue:113/255.0f alpha:1.0] ;
+
+//	imageView.image = [UIImage imageNamed:@"green.png"];
   } else {
-	imageView.image = [UIImage imageNamed:@"red.png"];
+      thickBorder.backgroundColor = [UIColor colorWithRed:231/255.0f green:76/255.0f blue:60/255.0f alpha:1.0];
+
+//	imageView.image = [UIImage imageNamed:@"red.png"];
   }
   
   
@@ -202,6 +238,55 @@
     // Dispose of any resources that can be recreated.
 }
 
+
+-(void)scrollViewWillBeginDragging:(UIScrollView *)scrollView
+{
+    _originY = _previousY = scrollView.contentOffset.y;
+}
+
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView
+{
+    CGFloat currentOffset = scrollView.contentOffset.y;
+    CGFloat scrolledDistance = _originY - currentOffset;
+    CGFloat lastScrolledDistance = _previousY - currentOffset;
+    _previousY = currentOffset;
+    
+    if(scrolledDistance < 0){
+        if(scrollView.isTracking && abs(lastScrolledDistance) > 1){
+            if(_isNavBarHidden)
+                return;
+            
+            _isNavBarHidden = YES;
+            [self.navigationController setNavigationBarHidden:YES animated:YES];
+            [[UIApplication sharedApplication] setStatusBarHidden:YES withAnimation:UIStatusBarAnimationFade];
+            
+        }
+    }else{
+        if(scrollView.isTracking && abs(lastScrolledDistance) > 1){
+            if(!_isNavBarHidden)
+                return;
+            
+            _isNavBarHidden = NO;
+            [self.navigationController setNavigationBarHidden:NO animated:YES];
+            [[UIApplication sharedApplication] setStatusBarHidden:NO withAnimation:UIStatusBarAnimationFade];
+            
+        }
+    }
+}
+
+
+-(BOOL)scrollViewShouldScrollToTop:(UIScrollView *)scrollView
+{
+    if(_isNavBarHidden)
+        return YES;
+    
+    _isNavBarHidden = YES;
+    [self.navigationController setNavigationBarHidden:YES animated:YES];
+    [[UIApplication sharedApplication] setStatusBarHidden:YES withAnimation:UIStatusBarAnimationFade];
+    return YES;
+}
+
+
 /*
 #pragma mark - Navigation
 
@@ -212,5 +297,18 @@
     // Pass the selected object to the new view controller.
 }
 */
+
+- (IBAction)notGoingAction:(id)sender {
+    PFObject *myPost = [PFObject objectWithClassName:@"Event_attendance"];
+    myPost[@"attendance"] = [NSNumber numberWithBool:NO];
+    myPost[@"summary"] = @"I will be there";
+    
+    myPost[@"eventId"] = self.object;
+    myPost[@"userId"] = [PFUser currentUser];
+    
+    // This will save both myPost and myComment
+    [myPost saveInBackground];
+}
+
 
 @end

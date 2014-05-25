@@ -9,8 +9,11 @@
 #import "ProfileViewController.h"
 #import <AFNetworking/UIImageView+AFNetworking.h>
 
-@interface ProfileViewController () <UITableViewDataSource, UITableViewDelegate>
+@interface ProfileViewController ()
 {
+    BOOL _isNavBarHidden;
+    CGFloat _originY;
+    CGFloat _previousY;
     GPUImageiOSBlurFilter *_blurFilter;
     NSDateFormatter *_dateFormatter;
     NSArray* _activities;
@@ -52,8 +55,6 @@
         _dateFormatter = [[NSDateFormatter alloc] init];
     }
     
-    self.activityTable.delegate = self;
-    self.activityTable.dataSource = self;
     [self refreshTable];
 }
 
@@ -90,7 +91,7 @@
 //                NSLog(@"Event 22 : %@", [object objectForKey:@"eventDate"]);
 //            }
             _activities = objects;
-            [self.activityTable reloadData];
+            [self.tableView reloadData];
         } else {
             // Log details of the failure
             NSLog(@"Error: %@ %@", error, [error userInfo]);
@@ -109,8 +110,29 @@
 }
 
 
+- (UIView*)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
+{
+    UIView* header = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.tableView.bounds.size.width, 30)];
+    header.backgroundColor = [UIColor colorWithRed:240/255.0f green:233/255.0f blue:221/255.0f alpha:1.0];
+    UILabel* headerLabel = [[UILabel alloc] initWithFrame:CGRectMake(10, 2, 100, 28)];
+    headerLabel.text = @"Activities";
+    [header addSubview:headerLabel];
+    
+    return header;
+}
+
+-(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
+{
+    return 30.0f;
+}
+
+-(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    return 90.0f;
+}
+
 -(UITableViewCell*)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
-    static NSString *identifier = @"profile_activity_cell";
+    static NSString *identifier = @"new_activity_cell";
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:identifier];
     if(cell == nil) {
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:identifier];
@@ -153,6 +175,53 @@
     eventTypeImg.image		  = eventImg;
     
     return cell;
+}
+
+-(void)scrollViewWillBeginDragging:(UIScrollView *)scrollView
+{
+    _originY = _previousY = scrollView.contentOffset.y;
+}
+
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView
+{
+    CGFloat currentOffset = scrollView.contentOffset.y;
+    CGFloat scrolledDistance = _originY - currentOffset;
+    CGFloat lastScrolledDistance = _previousY - currentOffset;
+    _previousY = currentOffset;
+    
+    if(scrolledDistance < 0){
+        if(scrollView.isTracking && abs(lastScrolledDistance) > 1){
+            if(_isNavBarHidden)
+                return;
+            
+            _isNavBarHidden = YES;
+            [self.navigationController setNavigationBarHidden:YES animated:YES];
+            [[UIApplication sharedApplication] setStatusBarHidden:YES withAnimation:UIStatusBarAnimationFade];
+
+        }
+    }else{
+        if(scrollView.isTracking && abs(lastScrolledDistance) > 1){
+            if(!_isNavBarHidden)
+                return;
+            
+            _isNavBarHidden = NO;
+            [self.navigationController setNavigationBarHidden:NO animated:YES];
+            [[UIApplication sharedApplication] setStatusBarHidden:NO withAnimation:UIStatusBarAnimationFade];
+
+        }
+    }
+}
+
+
+-(BOOL)scrollViewShouldScrollToTop:(UIScrollView *)scrollView
+{
+    if(_isNavBarHidden)
+        return YES;
+    
+    _isNavBarHidden = YES;
+    [self.navigationController setNavigationBarHidden:YES animated:YES];
+    [[UIApplication sharedApplication] setStatusBarHidden:YES withAnimation:UIStatusBarAnimationFade];
+    return YES;
 }
 
 /*

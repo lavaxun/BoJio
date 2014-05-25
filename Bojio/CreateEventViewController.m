@@ -10,6 +10,7 @@
 
 @interface CreateEventViewController () {
   
+    UIDatePicker *_datePicker;
   NSArray *userInterests;
   BOOL isPublic;
 }
@@ -206,9 +207,9 @@
 
 #pragma mark - Move Up / Move Down Screen 
 
--(void)moveUp {
+-(void)moveUp:(NSInteger)extra {
   CGRect frame = self.view.frame;
-  frame.origin.y = -40;
+  frame.origin.y = -130 - abs(extra);
   
   [UIView animateWithDuration:0.5f animations:^{
 	self.view.frame = frame;
@@ -219,16 +220,20 @@
 }
 
 
+-(void)moveUp {
+    return [self moveUp:0];
+}
+
 
 
 -(void)moveDown {
   CGRect frame = self.view.frame;
   frame.origin.y = 0;
   
-  [UIView animateWithDuration:0.5f animations:^{
+  [UIView animateWithDuration:0.15f animations:^{
 	self.view.frame = frame;
   } completion:^(BOOL finished) {
-	;
+	
   }];
   
   [self hideKeyboard];
@@ -280,6 +285,7 @@
 
   } else if(textField == self.eventTypeTxtFld) {
 	
+      [self moveUp];
 	[self showEventTypes];
 	[self hideKeyboard];
 	shouldBeginEditing =  NO;
@@ -298,7 +304,7 @@
 
 
 - (BOOL)textViewShouldBeginEditing:(UITextView *)textView {
-  [self moveUp];
+    [self moveUp:60];
   return YES;
 }
 
@@ -321,13 +327,15 @@
   self.actionSheet.actionSheetStyle = UIActionSheetStyleAutomatic;
   
   
-  UIDatePicker *datePicker=[[UIDatePicker alloc]init];//Date picker
-  datePicker.frame=CGRectMake(0,44,320, 300);
-  datePicker.datePickerMode = UIDatePickerModeDateAndTime;
-  [datePicker setMinuteInterval:5];
-  [datePicker setTag:10];
-  [datePicker addTarget:self action:@selector(dateChanged:) forControlEvents:UIControlEventValueChanged];
-  [self.actionSheet addSubview:datePicker];
+    if(!_datePicker){
+        _datePicker=[[UIDatePicker alloc]init];//Date picker
+        _datePicker.frame=CGRectMake(0,44,320, 300);
+        _datePicker.datePickerMode = UIDatePickerModeDateAndTime;
+        [_datePicker setMinuteInterval:5];
+        [_datePicker setTag:10];
+        [_datePicker addTarget:self action:@selector(dateChanged:) forControlEvents:UIControlEventValueChanged];
+        [self.actionSheet addSubview:_datePicker];
+    }
   
   
   //----------Toolbar-----------------
@@ -357,6 +365,7 @@
 
 - (void)hideActionSheet {
   [self.actionSheet dismissWithClickedButtonIndex:0 animated:YES];
+    [self moveDown];
 }
 
 

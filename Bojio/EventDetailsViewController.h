@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 #import <Parse/Parse.h>
 
-@interface EventDetailsViewController : UIViewController <UITableViewDataSource, UITableViewDelegate> {
+@interface EventDetailsViewController : UITableViewController <UITableViewDataSource, UITableViewDelegate> {
   
 }
 
@@ -18,10 +18,12 @@
 @property (weak, nonatomic) IBOutlet UILabel *eventPlaceLbl;
 @property (weak, nonatomic) IBOutlet UILabel *eventDateTime;
 @property (weak, nonatomic) IBOutlet UILabel *eventDescLbl;
-@property (weak, nonatomic) IBOutlet UILabel *eventTypeLbl;
+@property (weak, nonatomic) IBOutlet UIImageView *eventType;
+@property (weak, nonatomic) IBOutlet UIImageView *hostPicture;
 
 @property (weak, nonatomic) IBOutlet UIButton *yesBtn;
+@property (weak, nonatomic) IBOutlet UIButton *noBtn;
 
-@property (weak, nonatomic) IBOutlet UITableView *aTableView;
+- (IBAction)notGoingAction:(id)sender;
 
 @end

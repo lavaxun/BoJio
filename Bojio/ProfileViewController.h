@@ -9,12 +9,12 @@
 #import <UIKit/UIKit.h>
 #import <GPUImage.h>
 
-@interface ProfileViewController : UIViewController
+@interface ProfileViewController : UITableViewController<UITableViewDataSource, UITableViewDelegate>
+
 - (IBAction)logoutAction:(id)sender;
 @property (weak, nonatomic) IBOutlet UIImageView *profilePicture;
 @property (weak, nonatomic) IBOutlet UILabel *displayName;
 @property (weak, nonatomic) IBOutlet UILabel *email;
-@property (weak, nonatomic) IBOutlet UITableView *activityTable;
 @property (weak, nonatomic) IBOutlet GPUImageView *coverPhoto;
 
 @end
