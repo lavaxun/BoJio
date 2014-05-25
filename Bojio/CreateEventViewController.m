@@ -8,7 +8,10 @@
 
 #import "CreateEventViewController.h"
 
-@interface CreateEventViewController ()
+@interface CreateEventViewController () {
+  
+  NSArray *userInterests;
+}
 
 @end
 
@@ -27,7 +30,37 @@
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+  
+  [self loadUserInterests];
 }
+
+
+
+-(void)loadUserInterests {
+  
+  //------------------ Load the Users --------------------------
+  PFQuery *query = [PFQuery queryWithClassName:@"Store_interest"];
+  
+  [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
+	if (!error) {
+	  NSLog(@"Successfully retrieved %d interests.", objects.count);
+	  
+	  [self performSelectorOnMainThread:@selector(saveInterest:) withObject:objects waitUntilDone:NO];
+	  NSLog(@"userInterests : %@", objects);
+	  
+	} else {
+	  NSLog(@"UserInterests Error: %@ %@", error, [error userInfo]);
+	}
+  }];
+}
+
+
+-(void)saveInterest:(NSArray *)objects {
+  
+  userInterests = [NSMutableArray arrayWithArray:objects];
+  NSLog(@"userInterests saved : %@", userInterests);
+}
+
 
 
 #pragma mark - Create Event -
@@ -37,9 +70,9 @@
   
   
   NSString *eventTitle		  = [self.eventNameTxtFld.text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
-  NSString *eventPlaceTxtFld  = [self.eventNameTxtFld.text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
+  NSString *eventPlaceTxtFld  = [self.eventPlaceTxtFld.text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
   NSString *eventTimeTxtFld	  = [self.eventTimeTxtFld.text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
-  NSString *eventTypeTxtFld	  = [self.eventNameTxtFld.text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
+  NSString *eventTypeTxtFld	  = [self.eventTypeTxtFld.text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
   NSString *eventDescTxtView  = [self.eventDescTxtView.text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
   
   if(!eventTitle.length) {
@@ -56,6 +89,8 @@
   
  /*
   // Create PFObject with recipe information
+  PFObject *event = [PFObject objectWithClassName:@"User_events"];
+
   [event setObject:@"Test Event" forKey:@"title"];
   [event setObject:@"Summary" forKey:@"summary"];
 
@@ -75,7 +110,38 @@
   }
   
   
+  NSString *eventTitle		  = [self.eventNameTxtFld.text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
+  NSString *eventPlaceTxtFld  = [self.eventPlaceTxtFld.text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
+  NSString *eventTimeTxtFld	  = [self.eventTimeTxtFld.text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
+  NSString *eventTypeTxtFld	  = [self.eventTypeTxtFld.text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
+  NSString *eventDescTxtView  = [self.eventDescTxtView.text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
+
+  NSMutableArray *eventTypesArr = [NSMutableArray arrayWithCapacity:0];
+  [eventTypesArr addObject:@"Movie"];
+  [eventTypesArr addObject:@"Gym"];
+
+  
+  NSNumber *event_Public = [NSNumber numberWithBool:NO];
+  
+  PFUser *parentPointer = [PFUser currentUser];
+  
+  
+  
+  
   PFObject *event = [PFObject objectWithClassName:@"User_events"];
+  
+  [event setObject:eventTitle		forKey:@"title"];
+  [event setObject:eventDescTxtView forKey:@"summary"];
+  [event setObject:eventTimeTxtFld	forKey:@"eventDate"];
+  [event setObject:@"120"			forKey:@"eventPeriod"];
+  [event setObject:@""				forKey:@"location"];
+  [event setObject:@"Summary"		forKey:@"location_info"];
+  [event setObject:eventTypesArr	forKey:@"eventTypes"];
+  [event setObject:event_Public		forKey:@"event_public"];
+  [event setObject:parentPointer	forKey:@"parent"];
+
+  
+  
   
   [event saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
 	NSLog(@"Succeeded : %d", succeeded);
@@ -182,7 +248,7 @@
 
   } else if(textField == self.eventTypeTxtFld) {
 	
-	//[self showEventTypes];
+	[self showEventTypes];
 	[self hideKeyboard];
 	shouldBeginEditing =  NO;
 	
@@ -226,7 +292,7 @@
   datePicker.datePickerMode = UIDatePickerModeDateAndTime;
   [datePicker setMinuteInterval:5];
   [datePicker setTag:10];
-  //[datePicker addTarget:self action:@selector(Result) forControlEvents:UIControlEventValueChanged];
+  [datePicker addTarget:self action:@selector(dateChanged:) forControlEvents:UIControlEventValueChanged];
   [self.actionSheet addSubview:datePicker];
   
   
@@ -263,6 +329,75 @@
 #pragma mark -
 
 
+-(void)dateChanged : (UIDatePicker *)datePicker {
+  
+  NSDate *date = datePicker.date;
+  NSLog(@"Date Selected : %@", date);
+  
+  NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+  [dateFormatter setLocale:[NSLocale localeWithLocaleIdentifier:@"en_US"]];
+  [dateFormatter setDateFormat:@"dd-MMM-YYYY hh:mm:ss a"];
+  //  [dateFormatter setDateFormat:@"YYYY-MM-dd HH:mm:ss"];
+  NSString *dateStr = [dateFormatter stringFromDate:date];
+  
+  NSLog(@"DateStr : %@", dateStr);
+  self.eventTimeTxtFld.text = dateStr;
+}
+
+
+-(void)showEventTypes {
+  
+  if(self.actionSheet) {
+	self.actionSheet = nil;
+  }
+  
+  self.actionSheet = [[UIActionSheet alloc] initWithTitle:@"" delegate:nil cancelButtonTitle:nil destructiveButtonTitle:@" " otherButtonTitles:@" ", @" ", @" ",@" ",nil];
+  
+  
+  self.actionSheet.frame = CGRectMake(0, 0, 320, 400);
+  self.actionSheet.actionSheetStyle = UIActionSheetStyleDefault;
+  
+  
+
+  
+  
+  UIPickerView *pickerView = [[UIPickerView alloc] initWithFrame:CGRectMake(0, 0, 320,480)];
+  pickerView.backgroundColor = [UIColor whiteColor];
+  pickerView.delegate = self;
+  pickerView.dataSource = self;
+  [pickerView setShowsSelectionIndicator:YES];
+  [self.actionSheet addSubview:pickerView];
+  
+  
+  
+  
+  
+  //----------Toolbar-----------------
+  UIToolbar *pickerToolbar = [[UIToolbar alloc] initWithFrame:CGRectMake(0, 0, 320, 44)];
+  pickerToolbar.barStyle = UIBarStyleBlackOpaque;
+  [pickerToolbar sizeToFit];
+  
+  NSMutableArray *barItems = [[NSMutableArray alloc] init];
+  
+  UIBarButtonItem *cancelBtn = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel target:self action:@selector(hideActionSheet)];
+  [barItems addObject:cancelBtn];
+  
+  UIBarButtonItem *flexSpace = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:self action:nil];
+  [barItems addObject:flexSpace];
+  
+  UIBarButtonItem *doneBtn = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(hideActionSheet)];
+  [barItems addObject:doneBtn];
+  
+  [pickerToolbar setItems:barItems animated:YES];
+  
+  
+  
+  [self.actionSheet addSubview:pickerToolbar];
+  [self.actionSheet showInView:self.view];
+}
+
+
+
 
 #pragma mark Picker View Delegates
 
@@ -273,13 +408,13 @@
 
 - (NSInteger)pickerView:(UIPickerView *)pickerView numberOfRowsInComponent:(NSInteger)component {
   
-  return 10;// [self.blocksArr count];
+  return [userInterests count];
 }
 
 
 - (NSString *)pickerView:(UIPickerView *)pickerView titleForRow:(NSInteger)row forComponent:(NSInteger)component {
   
-  return @""; //[self.blocksArr objectAtIndex:row];
+  return [[userInterests objectAtIndex:row] objectForKey:@"title"];
 }
 
 - (CGFloat)pickerView:(UIPickerView *)pickerView rowHeightForComponent:(NSInteger)component {
@@ -290,7 +425,7 @@
 - (void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component {
   
   NSLog(@"pickerViewDid SelectRow : %d", row);
-  //self.blockNameLbl.text = [self.blocksArr objectAtIndex:row];
+  self.eventTypeTxtFld.text = [[userInterests objectAtIndex:row] objectForKey:@"title"];
   
 }
 
