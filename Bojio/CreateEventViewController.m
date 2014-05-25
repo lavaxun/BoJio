@@ -148,7 +148,7 @@
 												longitude:coordinate.longitude];
   
   
-  PFObject *locationInfoObj = [PFObject objectWithClassName:@"LocationInfoObj"];
+  NSMutableDictionary *locationInfoObj = [NSMutableDictionary dictionaryWithCapacity:0];
   [locationInfoObj setObject:@"Address name" forKey:@"Name"];
   [locationInfoObj setObject:@"This is the address" forKey:@"Address"];
   

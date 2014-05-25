@@ -60,9 +60,9 @@
 										   selector:@selector(refreshTable:)
 											   name:@"refreshTable"
 											 object:nil];
-  //[[NSNotificationCenter defaultCenter] postNotificationName:@"refreshTable" object:self];
+  [[NSNotificationCenter defaultCenter] postNotificationName:@"refreshTable" object:self];
 
-  [self loadUserInterests];
+  //[self loadUserInterests];
     
     PFPush *push = [[PFPush alloc] init];
     [push setChannel:[NSString stringWithFormat:@"%@%@",@"push",@"5cEcPOAdbo"]];
@@ -202,7 +202,10 @@
     NSString *eventTime	= [_dateFormatter stringFromDate:eventDate];
     NSString *eventType	= [[object objectForKey:@"eventTypes"] firstObject];
     NSString *eventDesc	= [object objectForKey:@"summary"];
-    
+  
+  
+  
+  
     UIImage *eventImg = nil;
     if([eventType isEqualToString:@"Gym"]){
         eventImg = [UIImage imageNamed:@"gym.jpg"];
