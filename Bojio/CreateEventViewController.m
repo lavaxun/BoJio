@@ -76,8 +76,10 @@
   NSString *eventDescTxtView  = [self.eventDescTxtView.text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
   
   if(!eventTitle.length) {
+	NSLog(@"No event title");
 	isValid = NO;
   } else if(!eventDescTxtView.length) {
+	NSLog(@"No event description");
 	isValid = NO;
   }
   
@@ -102,12 +104,15 @@
   [event setObject:@"" forKey:@"event_public"];
   */
   
-  if([self isValidEvent]) {
-	NSLog(@"Please enter mandatory fields");
-	UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"" message:@"Please enter event details" delegate:nil cancelButtonTitle:@"" otherButtonTitles:@"OK", nil];
-	[alert show];
-	return;
-  }
+//  if([self isValidEvent]) {
+//	NSLog(@"Please enter mandatory fields");
+//	UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"" message:@"Please enter event details" delegate:nil cancelButtonTitle:nil otherButtonTitles:@"OK", nil];
+//	[alert show];
+//	return;
+//  }
+  
+  
+  
   
   
   NSString *eventTitle		  = [self.eventNameTxtFld.text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
@@ -121,6 +126,12 @@
   [eventTypesArr addObject:@"Gym"];
 
   
+  NSDateFormatter *df = [[NSDateFormatter alloc] init];
+  [df setDateFormat:@"MMM dd, yyyy, HH:mm"];
+  NSDate *eventDate = [df dateFromString:eventTimeTxtFld];
+  
+  NSLog(@"Event Date : %@", eventDate);
+  
   NSNumber *event_Public = [NSNumber numberWithBool:NO];
   
   PFUser *parentPointer = [PFUser currentUser];
@@ -132,7 +143,7 @@
   
   [event setObject:eventTitle		forKey:@"title"];
   [event setObject:eventDescTxtView forKey:@"summary"];
-  [event setObject:eventTimeTxtFld	forKey:@"eventDate"];
+  [event setObject:eventDate		forKey:@"eventDate"];
   [event setObject:@"120"			forKey:@"eventPeriod"];
   [event setObject:@""				forKey:@"location"];
   [event setObject:@"Summary"		forKey:@"location_info"];
@@ -215,6 +226,8 @@
 	[self.eventTimeTxtFld resignFirstResponder];
   } else if([self.eventTypeTxtFld isFirstResponder]){
 	[self.eventTypeTxtFld resignFirstResponder];
+  } else if([self.eventDescTxtView isFirstResponder]) {
+	[self.eventDescTxtView resignFirstResponder];
   }
 }
 
@@ -225,6 +238,7 @@
 
 -(void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
   [self moveDown];
+  [self hideKeyboard];
 }
 
 
@@ -272,6 +286,8 @@
 
 - (BOOL)textViewShouldEndEditing:(UITextView *)textView {
   [self moveDown];
+  [self hideKeyboard];
+  [textView resignFirstResponder];
   return YES;
 }
 
